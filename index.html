@@ -223,11 +223,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">3</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Send the proof of payment</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Most banking apps email the proof automatically. If yours does not, send it to Anika with the same reference in the subject line.</div>
-<a href="{{ anikaHref }}" style="align-self:flex-start;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">Email Anika</a>
-<sc-if value="{{ noEmail }}" hint-placeholder-val="{{ true }}">
-<div style="font-size:13px;font-weight:300;line-height:1.5;color:#6d665c;">Placeholder - send me Anika's email address and I'll put it here.</div>
-</sc-if>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Most banking apps email the proof automatically. Simply reply to your confirmation email with it attached, or forward the bank's notification, keeping the reference in the subject line.</div>
 <div onClick="{{ togglePop }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
 <sc-if value="{{ popNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
 <sc-if value="{{ popYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
@@ -240,7 +236,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">4</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Anika sends your ticket</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">She checks the payment against your reference and sends your numbered ticket by email or WhatsApp, for example JOUBERT-014. Bring it with you on the night.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">She checks the payment against your reference and emails your numbered ticket, for example JOUBERT-014, with a PDF to print or keep on your phone and a file that adds the evening to your calendar. Bring it with you on the night.</div>
 </div>
 </div>
 </div>
@@ -564,11 +560,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">3</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Stuur die bewys van betaling</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Die meeste bankprogramme stuur die bewys outomaties. As joune nie, stuur dit aan Anika met dieselfde verwysing in die onderwerp.</div>
-<a href="{{ anikaHref }}" style="align-self:flex-start;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">E-pos Anika</a>
-<sc-if value="{{ noEmail }}" hint-placeholder-val="{{ true }}">
-<div style="font-size:13px;font-weight:300;line-height:1.5;color:#6d665c;">Plekhouer - stuur vir my Anika se e-posadres en ek plaas dit hier.</div>
-</sc-if>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Die meeste bankprogramme stuur die bewys outomaties. Antwoord net op jou bevestigingse-pos met die bewys aangeheg, of stuur die bank se kennisgewing aan, met die verwysing in die onderwerp.</div>
 <div onClick="{{ togglePop }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
 <sc-if value="{{ popNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
 <sc-if value="{{ popYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
@@ -581,7 +573,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">4</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Anika stuur jou kaartjie</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Sy kontroleer die betaling teen jou verwysing en stuur jou genommerde kaartjie per e-pos of WhatsApp, byvoorbeeld JOUBERT-014. Bring dit saam op die aand.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Sy kontroleer die betaling teen jou verwysing en e-pos jou genommerde kaartjie, byvoorbeeld JOUBERT-014, met ’n PDF om te druk of op jou foon te hou en ’n lêer wat die aand by jou kalender voeg. Bring dit saam op die aand.</div>
 </div>
 </div>
 </div>
@@ -720,7 +712,7 @@ a:hover{color:#7d3a1d}
 </div>
 </sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;appsScriptUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;anikaEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterPdfUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;siteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterImageUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterChoice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;church&quot;,&quot;organ&quot;],&quot;default&quot;:&quot;church&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sharing&quot;},&quot;programmeUnlocked&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Programme&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;appsScriptUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://script.google.com/macros/s/AKfycbyMCEW_1pfHseDtRmtAzoDr1nBDm-iFjkprWzQaKyVkpYGXFACN2T6CZ24RNE05fFUPUA/exec&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;anikaEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;anikawilliams.pa@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterPdfUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;siteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://jared97will-commits.github.io/song-for-a-century/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterImageUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://jared97will-commits.github.io/song-for-a-century/assets/poster-church.png&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterChoice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;church&quot;,&quot;organ&quot;],&quot;default&quot;:&quot;church&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sharing&quot;},&quot;programmeUnlocked&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Programme&quot;}}">
 class Component extends DCLogic {
   state = {
     lang: 'en', view: 'home', status: 'idle',
@@ -749,8 +741,13 @@ class Component extends DCLogic {
     return 'SFAS-' + first + '-' + last + '-' + n;
   }
 
+  endpoint() {
+    return (this.props.appsScriptUrl ||
+      'https://script.google.com/macros/s/AKfycbyMCEW_1pfHseDtRmtAzoDr1nBDm-iFjkprWzQaKyVkpYGXFACN2T6CZ24RNE05fFUPUA/exec').trim();
+  }
+
   siteUrl() {
-    const u = (this.props.siteUrl || '').trim();
+    const u = (this.props.siteUrl || 'https://jared97will-commits.github.io/song-for-a-century/').trim();
     if (u) return u.replace(/\/$/, '');
     try { return location.origin + location.pathname.replace(/[^/]*$/, ''); } catch (e) { return ''; }
   }
@@ -783,7 +780,7 @@ class Component extends DCLogic {
   }
 
   submit() {
-    const url = (this.props.appsScriptUrl || '').trim();
+    const url = this.endpoint();
     const s = this.state;
     if (!s.first.trim() || !s.last.trim() || !s.email.trim()) {
       this.setState({ status: 'missing' });
@@ -837,7 +834,7 @@ class Component extends DCLogic {
     const v = this.state.view;
     const on = '#9c4a26', off = 'transparent';
     const form = (this.props.bookingFormUrl || '').trim();
-    const email = (this.props.anikaEmail || '').trim();
+    const email = (this.props.anikaEmail || 'anikawilliams.pa@gmail.com').trim();
     const poster = (this.props.posterPdfUrl || '').trim();
     const doorsOpen = Date.parse('2026-10-30T18:30:00+02:00');
     const open = this.props.programmeUnlocked === true || Date.now() >= doorsOpen;
@@ -872,7 +869,7 @@ class Component extends DCLogic {
       sent: this.state.status === 'sent',
       missing: this.state.status === 'missing',
       failed: this.state.status === 'error',
-      noEndpoint: this.state.status === 'nourl' || !(this.props.appsScriptUrl || '').trim(),
+      noEndpoint: this.state.status === 'nourl' || !this.endpoint(),
       icsHref: this.ics(),
       waHref: 'https://wa.me/?text=' + encodeURIComponent(share),
       waHrefAf: 'https://wa.me/?text=' + encodeURIComponent(shareAf),
