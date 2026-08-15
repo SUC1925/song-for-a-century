@@ -22,10 +22,10 @@
 </svg>
 </template>
 <meta property="og:type" content="website">
-<meta property="og:url" content="SITE-URL-HERE">
+<meta property="og:url" content="https://jared97will-commits.github.io/song-for-a-century/">
 <meta property="og:title" content="Song for a Century">
 <meta property="og:description" content="A centenary organ concert at Stellenbosch United Church. Winand Grundling at the organ, with Annatjie Joubert, soprano. Friday 30 October 2026, 18:00 for 18:30. Cheese and wine to follow.">
-<meta property="og:image" content="SITE-URL-HERE/assets/poster-church.png">
+<meta property="og:image" content="https://jared97will-commits.github.io/song-for-a-century/assets/poster-church.png">
 <meta property="og:image:width" content="794">
 <meta property="og:image:height" content="1123">
 <meta name="twitter:card" content="summary_large_image">
@@ -158,7 +158,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">2</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Pay by EFT</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Your reference fills in from the details above. Use it exactly as shown so Anika can match the payment to your name.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Your reference fills in from the details above. Use it exactly as shown so Anika can match the payment to your name. These banking details and your reference are emailed to you the moment you send your booking, so there is no need to keep this page open.</div>
 <div style="background:#1c1a15;color:#f5f1e7;padding:26px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:20px 28px;">
 <div style="grid-column:1 / -1;font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#e0a172;">Banking details</div>
 <div>
@@ -202,11 +202,7 @@ a:hover{color:#7d3a1d}
 </div>
 </sc-if>
 </div>
-<div onClick="{{ togglePaid }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
-<sc-if value="{{ paidNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
-<sc-if value="{{ paidYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
-<span>I have made the payment</span>
-</div>
+
 <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
 <div style="font-size:15px;font-weight:400;color:#9c4a26;">Please fill in your name, surname and email address in step 1.</div>
 </sc-if>
@@ -222,13 +218,8 @@ a:hover{color:#7d3a1d}
 <div style="background:#f5f1e7;padding:26px 30px;display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">3</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
-<div style="font-size:22px;font-weight:500;">Send the proof of payment</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Most banking apps email the proof automatically. Simply reply to your confirmation email with it attached, or forward the bank's notification, keeping the reference in the subject line.</div>
-<div onClick="{{ togglePop }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
-<sc-if value="{{ popNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
-<sc-if value="{{ popYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
-<span>Proof of payment sent, or my bank sends it automatically</span>
-</div>
+<div style="font-size:22px;font-weight:500;">Pay, then send the proof</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Make the payment, then reply to your confirmation email with the bank's proof of payment attached. Please send it by replying, not from inside your banking app: the reply carries your reference, and that is what matches the payment to your name.</div>
 </div>
 </div>
 
@@ -495,7 +486,7 @@ a:hover{color:#7d3a1d}
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">2</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
 <div style="font-size:22px;font-weight:500;">Betaal per EFT</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Jou verwysing vul vanself in uit die besonderhede hierbo. Gebruik dit presies soos dit wys sodat Anika die betaling by jou naam kan pas.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Jou verwysing vul vanself in uit die besonderhede hierbo. Gebruik dit presies soos dit wys sodat Anika die betaling by jou naam kan pas. Hierdie bankbesonderhede en jou verwysing word aan jou ge-e-pos sodra jy jou bespreking stuur, so jy hoef nie die bladsy oop te hou nie.</div>
 <div style="background:#1c1a15;color:#f5f1e7;padding:26px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:20px 28px;">
 <div style="grid-column:1 / -1;font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#e0a172;">Bankbesonderhede</div>
 <div>
@@ -539,11 +530,7 @@ a:hover{color:#7d3a1d}
 </div>
 </sc-if>
 </div>
-<div onClick="{{ togglePaid }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
-<sc-if value="{{ paidNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
-<sc-if value="{{ paidYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
-<span>Ek het die betaling gemaak</span>
-</div>
+
 <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
 <div style="font-size:15px;font-weight:400;color:#9c4a26;">Vul asseblief jou naam, van en e-posadres in by stap 1.</div>
 </sc-if>
@@ -559,13 +546,8 @@ a:hover{color:#7d3a1d}
 <div style="background:#f5f1e7;padding:26px 30px;display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:0.9;color:#9c4a26;">3</div>
 <div style="display:flex;flex-direction:column;gap:14px;">
-<div style="font-size:22px;font-weight:500;">Stuur die bewys van betaling</div>
-<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Die meeste bankprogramme stuur die bewys outomaties. Antwoord net op jou bevestigingse-pos met die bewys aangeheg, of stuur die bank se kennisgewing aan, met die verwysing in die onderwerp.</div>
-<div onClick="{{ togglePop }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;font-size:16px;font-weight:400;align-self:flex-start;">
-<sc-if value="{{ popNo }}" hint-placeholder-val="{{ true }}"><div style="width:22px;height:22px;border:1px solid #1c1a15;flex:none;"></div></sc-if>
-<sc-if value="{{ popYes }}" hint-placeholder-val="{{ false }}"><div style="width:22px;height:22px;background:#9c4a26;color:#f5f1e7;flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;">&#10003;</div></sc-if>
-<span>Bewys van betaling gestuur, of my bank stuur dit outomaties</span>
-</div>
+<div style="font-size:22px;font-weight:500;">Betaal, stuur dan die bewys</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Maak die betaling en antwoord dan op jou bevestigingse-pos met die bank se bewys van betaling aangeheg. Stuur dit asseblief deur te antwoord, nie uit jou bankprogram nie: die antwoord dra jou verwysing saam, en dit is wat die betaling by jou naam pas.</div>
 </div>
 </div>
 
@@ -716,7 +698,7 @@ a:hover{color:#7d3a1d}
 class Component extends DCLogic {
   state = {
     lang: 'en', view: 'home', status: 'idle',
-    first: '', last: '', email: '', wa: '', seats: '2', paid: false, pop: false
+    first: '', last: '', email: '', wa: '', seats: '2'
   };
 
   toggle(key) {
@@ -791,17 +773,25 @@ class Component extends DCLogic {
     const body = new URLSearchParams({
       first: s.first.trim(), last: s.last.trim(), email: s.email.trim(),
       wa: s.wa.trim(), seats: String(Math.max(1, parseInt(s.seats, 10) || 1)),
-      reference: this.reference(), amount: String(this.amount()),
-      paid: s.paid ? 'yes' : 'no', proof: s.pop ? 'yes' : 'no'
+      reference: this.reference(), amount: String(this.amount())
     });
     fetch(url, { method: 'POST', mode: 'no-cors', body })
-      .then(() => this.setState({ status: 'sent' }))
+      .then(() => { this.setState({ status: 'sent' }); this.holdThenClear(); })
       .catch(() => this.setState({ status: 'error' }));
   }
 
   resetForm() {
-    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', seats: '2', paid: false, pop: false });
+    clearTimeout(this._clearT);
+    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', seats: '2' });
   }
+
+  /** A sent booking clears itself after an hour so the next visitor starts fresh. */
+  holdThenClear() {
+    clearTimeout(this._clearT);
+    this._clearT = setTimeout(() => this.resetForm(), 60 * 60 * 1000);
+  }
+
+  componentWillUnmount() { clearTimeout(this._clearT); clearTimeout(this._flashT); }
 
   ics() {
     const site = this.siteUrl();
@@ -826,7 +816,11 @@ class Component extends DCLogic {
     return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n'));
   }
 
-  go(view) { this.setState({ view }); window.scrollTo(0, 0); }
+  go(view) {
+    if (this.state.status === 'sent') this.resetForm();
+    this.setState({ view });
+    window.scrollTo(0, 0);
+  }
 
   renderVals() {
     const share = 'Song for a Century - a centenary organ concert at Stellenbosch United Church. Winand Grundling at the organ, with Annatjie Joubert, soprano. Friday 30 October 2026, 18:00 for 18:30. Cheese and wine to follow. R350 per person, R600 per couple.';
@@ -886,9 +880,6 @@ class Component extends DCLogic {
       copiedCaption: this.state.flash === 'caption',
       notCopiedCaption: this.state.flash !== 'caption',
       posterDownload: (this.props.posterChoice === 'organ') ? 'assets/poster-organ.png' : 'assets/poster-church.png',
-      togglePaid: this.toggle('paid'), togglePop: this.toggle('pop'),
-      paidYes: this.state.paid === true, paidNo: this.state.paid !== true,
-      popYes: this.state.pop === true, popNo: this.state.pop !== true,
       notSent: this.state.status !== 'sent',
       showSend: this.state.status !== 'sent' && this.state.status !== 'sending'
     };
