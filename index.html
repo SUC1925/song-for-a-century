@@ -59,7 +59,6 @@ a:hover{color:#7d3a1d}
 <div style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px;">
 <div onClick="{{ goHome }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navHome }};" style-hover="background:#eae4d6;">Home</div>
 <div onClick="{{ goBook }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navBook }};" style-hover="background:#eae4d6;">Booking</div>
-<div onClick="{{ goOrgan }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navOrgan }};" style-hover="background:#eae4d6;">Organ</div>
 <div onClick="{{ goCast }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navCast }};" style-hover="background:#eae4d6;">Performers</div>
 <div onClick="{{ goProg }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navProg }};" style-hover="background:#eae4d6;">Programme</div>
 <div onClick="{{ goChurch }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navChurch }};" style-hover="background:#eae4d6;">Church</div>
@@ -105,7 +104,8 @@ a:hover{color:#7d3a1d}
 
 <img src="assets/colour-church.jpg" alt="Drawing of Stellenbosch United Church" style="width:100%;max-width:560px;aspect-ratio:0.848;object-fit:cover;object-position:50% 18%;display:block;margin:26px auto -10px;">
 
-<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">A hundred years after this building opened its doors, the organ takes the lead for an evening. Winand Grundling plays it at full voice, joined by soprano Annatjie Joubert, and the evening carries on afterwards over cheese and wine. The proceeds go to the church's centenary fund.</p>
+<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">A hundred years after this building opened its doors, Winand Grundling sits down at its organ for an evening of music, song and a good deal of wit. He plays, and he talks you through what you are hearing. Soprano Annatjie Joubert joins him for the songs. Cheese and wine afterwards, and the proceeds go to the church's centenary fund.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;max-width:620px;margin:-40px 0 60px;color:#6d665c;text-wrap:pretty;">The organ is a modest university-style instrument, so the evening leaves the big Baroque works aside and plays to what it does best. Winand's own description; wording still to be confirmed.</p>
 </div>
 </sc-if>
 
@@ -251,19 +251,6 @@ a:hover{color:#7d3a1d}
 </div>
 </sc-if>
 
-<sc-if value="{{ isOrgan }}" hint-placeholder-val="{{ false }}">
-<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;">
-<div>
-<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">The instrument</div>
-<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 16px;">Organ</h2>
-<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 14px;text-wrap:pretty;">The organ has stood at the front of this church for generations, heard every Sunday and seldom given a night of its own. This evening is that night: the full range of the instrument, from its quietest stops to the moment every pipe is speaking at once.</p>
-</div>
-<img src="assets/colour-organ.jpg" alt="Drawing of the church organ" style="width:100%;max-width:380px;justify-self:center;display:block;">
-</div>
-</div>
-</sc-if>
-
 <sc-if value="{{ isCast }}" hint-placeholder-val="{{ false }}">
 <div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
 <div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">The evening's music</div>
@@ -272,7 +259,9 @@ a:hover{color:#7d3a1d}
 <div style="border-top:2px solid #1c1a15;padding-top:16px;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Winand Grundling</div>
 <div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Organ</div>
-<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">A Stellenbosch University alumnus and a familiar name on South African organ programmes, Winand Grundling has built a reputation for playing that is as much about colour as it is about power.</p>
+<img src="assets/winand.jpg" alt="Winand Grundling at the console" style="width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 16%;display:block;margin:0 0 16px;">
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Winand Grundling began organ studies with Colin Campbell in 2002, read for his BMus at Nelson Mandela Metropolitan University and took his BMus Hons cum laude at Stellenbosch University under Mario Nell. He holds Trinity and Unisa performance licentiates, both with distinction, and has studied at the Haarlem Organ Summer School, the Eastman School of Music and the Bach Academy in Amsterdam.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">He is overall winner of the ABSA National Youth Music Competition and of the Unisa and SAKOV overseas bursary competitions, and holds three Kanna Awards: two in 2012 for 14 Stasies van die Kruis and one in 2015 for Bach-Vandag. Organist of the Dutch Reformed Church Stellenbosch-Welgelegen, he has played Organ Week at the Woordfees since 2015 and tours his comedy production, A Victor Borge Tribute.</p>
 </div>
 <div style="border-top:2px solid #1c1a15;padding-top:16px;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Annatjie Joubert</div>
@@ -388,7 +377,6 @@ a:hover{color:#7d3a1d}
 <div style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px;">
 <div onClick="{{ goHome }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navHome }};" style-hover="background:#eae4d6;">Tuis</div>
 <div onClick="{{ goBook }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navBook }};" style-hover="background:#eae4d6;">Besprekings</div>
-<div onClick="{{ goOrgan }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navOrgan }};" style-hover="background:#eae4d6;">Orrel</div>
 <div onClick="{{ goCast }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navCast }};" style-hover="background:#eae4d6;">Kunstenaars</div>
 <div onClick="{{ goProg }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navProg }};" style-hover="background:#eae4d6;">Program</div>
 <div onClick="{{ goChurch }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navChurch }};" style-hover="background:#eae4d6;">Kerk</div>
@@ -434,7 +422,8 @@ a:hover{color:#7d3a1d}
 
 <img src="assets/colour-church.jpg" alt="Tekening van die Stellenbosch United Church" style="width:100%;max-width:560px;aspect-ratio:0.848;object-fit:cover;object-position:50% 18%;display:block;margin:26px auto -10px;">
 
-<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">Honderd jaar nadat hierdie gebou sy deure oopgemaak het, kry die orrel 'n aand van sy eie. Winand Grundling speel dit op volle stem, met sopraan Annatjie Joubert aan sy sy, en die aand gaan daarna voort met kaas en wyn. Die opbrengs gaan na die kerk se eeufeesfonds.</p>
+<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">Honderd jaar nadat hierdie gebou sy deure oopgemaak het, gaan Winand Grundling agter sy orrel sit vir 'n aand van musiek, sang en 'n goeie skoot humor. Hy speel, en hy vertel jou wat jy hoor. Sopraan Annatjie Joubert sluit by hom aan vir die liedere. Kaas en wyn na afloop, en die opbrengs gaan aan die kerk se eeufeesfonds.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;max-width:620px;margin:-40px 0 60px;color:#6d665c;text-wrap:pretty;">Die orrel is 'n beskeie universiteitstipe instrument, en die aand laat dus die groot Barokwerke eerder uit en speel op sy sterk punte. Winand se eie woorde; formulering nog te bevestig.</p>
 </div>
 </sc-if>
 
@@ -580,19 +569,6 @@ a:hover{color:#7d3a1d}
 </div>
 </sc-if>
 
-<sc-if value="{{ isOrgan }}" hint-placeholder-val="{{ false }}">
-<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;">
-<div>
-<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Die instrument</div>
-<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 16px;">Orrel</h2>
-<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 14px;text-wrap:pretty;">Die orrel staan al geslagte lank voor in hierdie kerk, elke Sondag gehoor maar selde op sy eie. Vanaand is daardie aand: die volle omvang van die instrument, van sy stilste registers tot die oomblik wanneer elke pyp saam praat.</p>
-</div>
-<img src="assets/colour-organ.jpg" alt="Tekening van die kerkorrel" style="width:100%;max-width:380px;justify-self:center;display:block;">
-</div>
-</div>
-</sc-if>
-
 <sc-if value="{{ isCast }}" hint-placeholder-val="{{ false }}">
 <div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
 <div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Die aand se musiek</div>
@@ -601,7 +577,9 @@ a:hover{color:#7d3a1d}
 <div style="border-top:2px solid #1c1a15;padding-top:16px;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Winand Grundling</div>
 <div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Orrel</div>
-<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">'n Alumnus van die Universiteit Stellenbosch en 'n bekende naam op Suid-Afrikaanse orrelprogramme. Sy spel gaan net soveel oor kleur as oor krag.</p>
+<img src="assets/winand.jpg" alt="Winand Grundling at the console" style="width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 16%;display:block;margin:0 0 16px;">
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Winand Grundling het in 2002 onder Colin Campbell met orrelstudie begin, sy BMus aan die Nelson Mandela Metropolitaanse Universiteit verwerf en sy BMus Hons cum laude aan die Universiteit Stellenbosch onder Mario Nell voltooi. Hy het uitvoerende lisensiate van Trinity en Unisa, albei met onderskeiding, en het by die Haarlem Orrelsomerskool, die Eastman School of Music en die Bach-Akademie in Amsterdam studeer.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Hy is algehele wenner van die ABSA Nasionale Jeugmusiekkompetisie en van die Unisa- en SAKOV-oorsese beurskompetisies, en het drie Kanna-toekennings: twee in 2012 vir 14 Stasies van die Kruis en een in 2015 vir Bach-Vandag. Hy is orrelis van die NG Kerk Stellenbosch-Welgelegen, speel sedert 2015 Orrelweek by die Woordfees, en toer met sy komedieproduksie A Victor Borge Tribute.</p>
 </div>
 <div style="border-top:2px solid #1c1a15;padding-top:16px;">
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Annatjie Joubert</div>
@@ -833,13 +811,13 @@ class Component extends DCLogic {
       isAf: this.state.lang === 'af',
       setEn: () => this.setState({ lang: 'en' }),
       setAf: () => this.setState({ lang: 'af' }),
-      isHome: v === 'home', isBook: v === 'book', isOrgan: v === 'organ',
+      isHome: v === 'home', isBook: v === 'book',
       isCast: v === 'cast', isProg: v === 'prog', isChurch: v === 'church',
       navHome: v === 'home' ? on : off, navBook: v === 'book' ? on : off,
-      navOrgan: v === 'organ' ? on : off, navCast: v === 'cast' ? on : off,
+      navCast: v === 'cast' ? on : off,
       navProg: v === 'prog' ? on : off, navChurch: v === 'church' ? on : off,
       goHome: () => this.go('home'), goBook: () => this.go('book'),
-      goOrgan: () => this.go('organ'), goCast: () => this.go('cast'),
+      goCast: () => this.go('cast'),
       goProg: () => this.go('prog'), goChurch: () => this.go('church'),
       bookingHref: form || '#booking-form-link',
       posterHref: poster || ((this.props.posterChoice === 'organ') ? 'assets/poster-organ.png' : 'assets/poster-church.png'),
