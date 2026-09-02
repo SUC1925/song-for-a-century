@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" fill="#f5f1e7"></rect>
+<g fill="#9c4a26">
+<rect x="62" y="74" width="10" height="66" rx="5"></rect>
+<rect x="80" y="60" width="10" height="80" rx="5"></rect>
+<rect x="98" y="52" width="10" height="88" rx="5"></rect>
+<rect x="116" y="64" width="10" height="76" rx="5"></rect>
+<rect x="134" y="80" width="10" height="60" rx="5"></rect>
+</g>
+<rect x="60" y="146" width="86" height="6" fill="#1c1a15"></rect>
+</svg>
+</template>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suc1925.github.io/song-for-a-century/">
+<meta property="og:title" content="Song for a Century">
+<meta property="og:description" content="A centenary organ concert at Stellenbosch United Church. Winand Grundling at the organ, with Annatjie Joubert, soprano. Friday 30 October 2026, 18:00 for 18:30. Cheese and wine to follow.">
+<meta property="og:image" content="https://suc1925.github.io/song-for-a-century/assets/poster-church.png">
+<meta property="og:image:width" content="794">
+<meta property="og:image:height" content="1123">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f5f1e7}
+a{color:#9c4a26;text-decoration:none}
+a:hover{color:#7d3a1d}
+</style>
+</helmet>
+
+<sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">
+<div style="background:#f5f1e7;color:#1c1a15;font-family:Jost,sans-serif;min-height:100vh;overflow-x:clip;overflow-wrap:break-word;">
+
+<div style="position:sticky;top:0;z-index:20;background:#f5f1e7;border-bottom:1px solid #cdc5b4;">
+<div style="max-width:1000px;margin:0 auto;padding:0 clamp(16px,4.5vw,24px);">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:14px 0 10px;">
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="assets/logo-window.jpg" alt="Stellenbosch United Church window emblem" style="width:30px;height:30px;object-fit:contain;display:block;mix-blend-mode:multiply;">
+<div style="font-size:clamp(9px,2.5vw,12px);font-weight:600;letter-spacing:clamp(0.1em,0.9vw,0.28em);text-transform:uppercase;">Stellenbosch United Church</div>
+</div>
+<div style="display:flex;align-items:center;gap:14px;">
+<div style="font-size:clamp(9px,2.5vw,12px);font-weight:400;letter-spacing:clamp(0.1em,0.9vw,0.28em);text-transform:uppercase;color:#9c4a26;">1925-2025</div>
+<div style="display:flex;gap:2px;border:1px solid #cdc5b4;">
+<div style="padding:4px 10px;font-size:11px;font-weight:600;letter-spacing:0.14em;background:#1c1a15;color:#f5f1e7;">EN</div>
+<div onClick="{{ setAf }}" style="padding:4px 10px;font-size:11px;font-weight:600;letter-spacing:0.14em;cursor:pointer;color:#6d665c;" style-hover="background:#eae4d6;">AF</div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px;">
+<div onClick="{{ goHome }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navHome }};" style-hover="background:#eae4d6;">Home</div>
+<div onClick="{{ goBook }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navBook }};" style-hover="background:#eae4d6;">Booking</div>
+<div onClick="{{ goCast }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navCast }};" style-hover="background:#eae4d6;">Performers</div>
+<div onClick="{{ goProg }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navProg }};" style-hover="background:#eae4d6;">Programme</div>
+<div onClick="{{ goChurch }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navChurch }};" style-hover="background:#eae4d6;">Church</div>
+</div>
+</div>
+</div>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:1000px;margin:0 auto;padding:0 clamp(16px,4.5vw,24px);">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-top:34px;">
+<h1 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(40px,9.2vw,72px);line-height:1;letter-spacing:-0.015em;font-weight:400;margin:0;">Song for a Century</h1>
+<div style="text-align:right;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#9c4a26;">At the organ</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(25px,5.4vw,34px);line-height:1.05;">Winand Grundling</div>
+<div style="font-size:16px;font-weight:300;">with Annatjie Joubert, soprano</div>
+</div>
+</div>
+
+<div style="display:flex;justify-content:center;margin:26px 0 22px;">
+<div style="background:#9c4a26;color:#f8f4ea;padding:10px clamp(16px,5vw,32px);font-size:clamp(17px,3.6vw,23px);font-weight:500;">Cheese and wine to follow</div>
+</div>
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:36px;flex-wrap:wrap;border-top:1px solid #1c1a15;border-bottom:1px solid #1c1a15;padding:18px 0;">
+<div>
+<div style="font-size:clamp(23px,4.8vw,30px);font-weight:500;line-height:1.1;">Friday 30 October 2026</div>
+<div style="font-size:17px;font-weight:300;padding-top:4px;">18:00 for 18:30 · Stellenbosch United Church</div>
+</div>
+<div style="border-left:clamp(0px,calc((100vw - 620px) * 999),1px) solid #cdc5b4;padding-left:clamp(0px,calc((100vw - 620px) * 999),36px);">
+<div style="font-size:clamp(22px,4.5vw,28px);font-weight:500;line-height:1.15;white-space:nowrap;">R350 <span style="font-size:16px;font-weight:300;">per person</span></div>
+<div style="font-size:clamp(22px,4.5vw,28px);font-weight:500;line-height:1.15;white-space:nowrap;">R600 <span style="font-size:16px;font-weight:300;">per couple</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;padding:22px 0 8px;">
+<a href="{{ posterDownload }}" download="song-for-a-century.png" style="border:1px solid #1c1a15;color:#1c1a15;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;" style-hover="background:#eae4d6;">Download poster</a>
+<sc-if value="{{ notCopiedCaption }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ copyCaption }}" style="cursor:pointer;border:1px solid #1c1a15;color:#1c1a15;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;" style-hover="background:#eae4d6;">Copy caption</div>
+</sc-if>
+<sc-if value="{{ copiedCaption }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid #9c4a26;color:#9c4a26;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;">Caption copied</div>
+</sc-if>
+</div>
+
+<img src="assets/colour-church.jpg" alt="Drawing of Stellenbosch United Church" style="width:100%;max-width:560px;aspect-ratio:0.848;object-fit:cover;object-position:50% 18%;display:block;margin:26px auto -10px;">
+
+<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">A hundred years after this building opened its doors, Winand Grundling sits down at its organ for an evening of music, song and a good deal of wit. He plays, and he talks you through what you are hearing. Soprano Annatjie Joubert joins him for the songs. Cheese and wine afterwards, and the proceeds go to the church's centenary fund.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBook }}" hint-placeholder-val="{{ false }}">
+<div style="background:#efe9dc;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(36px,8vw,56px);">
+<div style="max-width:1000px;margin:0 auto;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Tickets</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 8px;">Booking your seats</h2>
+<p style="font-size:17px;font-weight:300;line-height:1.6;max-width:620px;margin:0 0 34px;">Four steps. <span style="font-weight:500;color:#9c4a26;">NB: read step 3 carefully.</span> Your seats are held as soon as the payment reflects.</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">1</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Your details</div>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Sent</div></sc-if>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px;">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">First name
+<input type="text" value="{{ first }}" onChange="{{ setFirst }}" placeholder="Anna" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Surname
+<input type="text" value="{{ last }}" onChange="{{ setLast }}" placeholder="Joubert" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Email
+<input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="anna@example.co.za" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Mobile number
+<div style="display:flex;gap:8px;">
+<select value="{{ dial }}" onChange="{{ setDial }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 8px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;flex:0 0 92px;">
+<option value="+27">+27</option>
+<option value="+264">+264</option>
+<option value="+267">+267</option>
+<option value="+44">+44</option>
+<option value="+1">+1</option>
+<option value="+61">+61</option>
+<option value="+31">+31</option>
+<option value="+49">+49</option>
+<option value="+33">+33</option>
+</select>
+<input type="tel" value="{{ wa }}" onChange="{{ setWa }}" placeholder="82 123 4567" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;flex:1 1 auto;min-width:0;">
+</div>
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Seats
+<select value="{{ seats }}" onChange="{{ setSeats }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+<option value="1">1 &middot; R350</option>
+<option value="2">2 &middot; R600 (couple)</option>
+<option value="3">3 &middot; R950</option>
+<option value="4">4 &middot; R1200</option>
+<option value="5">5 &middot; R1550</option>
+<option value="6">6 &middot; R1800</option>
+</select>
+</label>
+</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">2</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Your banking details</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Your reference fills in from step 1. Use it exactly as shown. The details below are emailed to you the moment you send the booking.</div>
+<div style="background:#1c1a15;color:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:20px 28px;">
+<div style="grid-column:1 / -1;font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#e0a172;">Banking details</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Account name</div>
+<div style="font-size:18px;font-weight:400;">Stellenbosch United Church</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Bank</div>
+<div style="font-size:18px;font-weight:400;">Standard Bank</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">Stellenbosch, branch 050610</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Account number</div>
+<div style="font-size:18px;font-weight:400;">072269901</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">SWIFT SBZAZAJJ</div>
+</div>
+<div style="grid-column:1 / -1;border-top:1px solid #3a352c;padding-top:18px;display:flex;gap:40px;flex-wrap:wrap;">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Your reference</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;color:#e0a172;">{{ refPreview }}</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">Fills in from step 1</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Amount due</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;">{{ amountDue }}</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">R350 per person, R600 per couple</div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+<sc-if value="{{ sendReady }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ doSubmit }}" style="cursor:pointer;background:#1c1a15;color:#f5f1e7;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;" style-hover="background:#332f27;">Send my booking</div>
+</sc-if>
+<sc-if value="{{ sendBlocked }}" hint-placeholder-val="{{ true }}">
+<div style="background:#ddd5c4;color:#8b8376;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;cursor:not-allowed;">Send my booking</div>
+<div style="font-size:14px;font-weight:300;color:#6d665c;">Fill in every field in step 1 first.</div>
+</sc-if>
+<sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
+<div style="background:#6d665c;color:#f5f1e7;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;">Sending...</div>
+</sc-if>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+<div style="font-size:16px;font-weight:400;color:#9c4a26;">Booking sent. Your seats are held.</div>
+<div onClick="{{ doReset }}" style="cursor:pointer;border:1px solid #1c1a15;padding:11px 22px;font-size:15px;font-weight:500;" style-hover="background:#eae4d6;">Book more seats</div>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:15px;font-weight:400;color:#9c4a26;">That didn't go through. Please try again, or phone the church office on 021 887 0495.</div>
+</sc-if>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">3</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Pay, then reply with the proof</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;"><span style="font-weight:500;">Reply to your confirmation email</span> with the bank's proof of payment attached. Do not send it from inside your banking app: only the reply carries your reference, and the reference is what matches the payment to your name.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">If nothing arrives within 15 minutes the seats are released and you will need to book again.</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">4</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Your ticket arrives</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Once the payment is matched, your numbered ticket is emailed to you, for example JOUBERT-014, as a PDF with a calendar file. Bring it on the night, on paper or on your phone.</div>
+</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;margin-top:22px;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+<div style="max-width:600px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(22px,4.5vw,28px);line-height:1.15;">Can't join us on the night?</div>
+<div style="font-size:16px;font-weight:300;line-height:1.6;padding-top:6px;">You are welcome to support the centenary fund directly. Use the same banking details with the reference <span style="font-weight:500;">SONGFORACENTURY</span>.</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCast }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">The evening's music</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 26px;">Performers</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;">
+<div style="border-top:2px solid #1c1a15;padding-top:16px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Winand Grundling</div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Organ</div>
+<img src="assets/winand.jpg" alt="Winand Grundling at the console" style="width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 16%;display:block;margin:0 0 16px;">
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Winand Grundling began organ studies with Colin Campbell in 2002, read for his BMus at Nelson Mandela Metropolitan University and took his BMus Hons cum laude at Stellenbosch University under Mario Nell. He holds Trinity and Unisa performance licentiates, both with distinction, and has studied at the Haarlem Organ Summer School, the Eastman School of Music and the Bach Academy in Amsterdam.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">He is overall winner of the ABSA National Youth Music Competition and of the Unisa and SAKOV overseas bursary competitions, and holds three Kanna Awards: two in 2012 for 14 Stasies van die Kruis and one in 2015 for Bach-Vandag. Organist of the Dutch Reformed Church Stellenbosch-Welgelegen, he has played Organ Week at the Woordfees since 2015 and tours his comedy production, A Victor Borge Tribute.</p>
+</div>
+<div style="border-top:2px solid #1c1a15;padding-top:16px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Annatjie Joubert</div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Soprano</div>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">A classically trained opera singer who read for her BMus at Rhodes University, Annatjie Joubert joins the organ for several works across the evening.</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProg }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Programme</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 20px;">What you'll hear</h2>
+<sc-if value="{{ progLocked }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid #cdc5b4;background:#efe9dc;padding:clamp(24px,5.5vw,38px) clamp(18px,5vw,32px);display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;">Published on the night</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.15;">The programme appears here at 18:30 on Friday 30 October 2026</div>
+<div style="font-size:17px;font-weight:300;line-height:1.6;max-width:620px;">Scan the QR code on your ticket, or open this page on the night, and the full running order - works, composers and the songs Annatjie sings - will be waiting.</div>
+</div>
+</sc-if>
+<sc-if value="{{ progOpen }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;">
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">First half</div>
+<div style="font-size:18px;font-weight:300;">Organ solo works, opening with the full instrument</div>
+</div>
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">With soprano</div>
+<div style="font-size:18px;font-weight:300;">Songs for voice and organ, sung by Annatjie Joubert</div>
+</div>
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Second half</div>
+<div style="font-size:18px;font-weight:300;">A centenary hymn sung by the congregation, and a closing work for organ</div>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isChurch }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:44px 24px 0;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">1925-2025</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 16px;">Church</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
+<div>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 12px;text-wrap:pretty;">The congregation began in 1899 as a Presbyterian congregation, and became Stellenbosch United Church in 1990 when it united locally with the Uniting Congregational Church of Southern Africa. It is a multicultural congregation with two campuses, one in Stellenbosch and one in Kayamandi, which worship together through the year.</p>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0;text-wrap:pretty;">The building on Van Riebeeck Street has been its home for a century, and this concert closes the centenary year. What is raised goes to the church's centenary fund.</p>
+</div>
+<div>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 12px;text-wrap:pretty;">Alongside the Sunday services the congregation runs the Stellenbosch United Church Education Trust, founded in 2005 to mentor and support students who are the first in their family to study at a university.</p>
+</div>
+</div>
+</div>
+
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Getting there</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);font-weight:400;line-height:1.05;margin:6px 0 20px;">8 Van Riebeeck Street</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;align-items:start;">
+<div>
+<div style="font-size:20px;font-weight:400;line-height:1.5;">Stellenbosch Central, 7600<br>Church office 021 887 0495</div>
+<div style="background:#efe9dc;padding:16px 18px;margin-top:18px;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;margin-bottom:6px;">Parking</div>
+<div style="font-size:16px;font-weight:300;line-height:1.55;">There is no parking at the church. Please use the church entrance for drop-off only. 150m from the church, next to De Cameron restaurant, is a large public parking area.</div>
+</div>
+<a href="{{ mapHref }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">Get directions</a>
+</div>
+<iframe title="Map of Stellenbosch Central" src="https://www.openstreetmap.org/export/embed.html?bbox=18.8583%2C-33.9399%2C18.8712%2C-33.9329&amp;layer=mapnik&amp;marker=-33.936394%2C18.864728" style="width:100%;height:300px;border:1px solid #cdc5b4;display:block;filter:sepia(0.35) saturate(0.7);"></iframe>
+</div>
+</div>
+</sc-if>
+
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 64px;">
+<div style="border-top:1px solid #1c1a15;padding-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;align-items:start;">
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">Stellenbosch United Church</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">8 Van Riebeeck Street<br>Stellenbosch Central, 7600<br>Church office 021 887 0495<br>Office hours Mon-Fri, 07:30-12:30<br><a href="https://www.stbuc.co.za/" target="_blank" rel="noopener">stbuc.co.za</a></div>
+</div>
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">Ticket enquiries</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">Scan to message us on WhatsApp.</div>
+<img src="assets/qr-tickets-warm.png" alt="QR code to message us on WhatsApp" style="width:104px;height:104px;display:block;margin-top:10px;mix-blend-mode:multiply;">
+</div>
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">The poster</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">Print it for your noticeboard or share it.</div>
+<a href="{{ posterHref }}" download="song-for-a-century-poster.pdf" style="display:inline-block;margin-top:10px;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">Download the poster</a>
+</div>
+</div>
+</div>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ isAf }}" hint-placeholder-val="{{ false }}">
+<div style="background:#f5f1e7;color:#1c1a15;font-family:Jost,sans-serif;min-height:100vh;overflow-x:clip;overflow-wrap:break-word;">
+
+<div style="position:sticky;top:0;z-index:20;background:#f5f1e7;border-bottom:1px solid #cdc5b4;">
+<div style="max-width:1000px;margin:0 auto;padding:0 clamp(16px,4.5vw,24px);">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:14px 0 10px;">
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="assets/logo-window.jpg" alt="Stellenbosch United Church window emblem" style="width:30px;height:30px;object-fit:contain;display:block;mix-blend-mode:multiply;">
+<div style="font-size:clamp(9px,2.5vw,12px);font-weight:600;letter-spacing:clamp(0.1em,0.9vw,0.28em);text-transform:uppercase;">Stellenbosch United Church</div>
+</div>
+<div style="display:flex;align-items:center;gap:14px;">
+<div style="font-size:clamp(9px,2.5vw,12px);font-weight:400;letter-spacing:clamp(0.1em,0.9vw,0.28em);text-transform:uppercase;color:#9c4a26;">1925-2025</div>
+<div style="display:flex;gap:2px;border:1px solid #cdc5b4;">
+<div onClick="{{ setEn }}" style="padding:4px 10px;font-size:11px;font-weight:600;letter-spacing:0.14em;cursor:pointer;color:#6d665c;" style-hover="background:#eae4d6;">EN</div>
+<div style="padding:4px 10px;font-size:11px;font-weight:600;letter-spacing:0.14em;background:#1c1a15;color:#f5f1e7;">AF</div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px;">
+<div onClick="{{ goHome }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navHome }};" style-hover="background:#eae4d6;">Tuis</div>
+<div onClick="{{ goBook }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navBook }};" style-hover="background:#eae4d6;">Besprekings</div>
+<div onClick="{{ goCast }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navCast }};" style-hover="background:#eae4d6;">Kunstenaars</div>
+<div onClick="{{ goProg }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navProg }};" style-hover="background:#eae4d6;">Program</div>
+<div onClick="{{ goChurch }}" style="cursor:pointer;padding:11px clamp(9px,2.6vw,14px);font-size:clamp(13px,3.5vw,14px);font-weight:500;letter-spacing:0.02em;border-bottom:2px solid {{ navChurch }};" style-hover="background:#eae4d6;">Kerk</div>
+</div>
+</div>
+</div>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:1000px;margin:0 auto;padding:0 clamp(16px,4.5vw,24px);">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-top:34px;">
+<h1 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(40px,9.2vw,72px);line-height:1;letter-spacing:-0.015em;font-weight:400;margin:0;">Song for a Century</h1>
+<div style="text-align:right;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#9c4a26;">By die orrel</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(25px,5.4vw,34px);line-height:1.05;">Winand Grundling</div>
+<div style="font-size:16px;font-weight:300;">met Annatjie Joubert, sopraan</div>
+</div>
+</div>
+
+<div style="display:flex;justify-content:center;margin:26px 0 22px;">
+<div style="background:#9c4a26;color:#f8f4ea;padding:10px clamp(16px,5vw,32px);font-size:clamp(17px,3.6vw,23px);font-weight:500;">Kaas en wyn na afloop</div>
+</div>
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:36px;flex-wrap:wrap;border-top:1px solid #1c1a15;border-bottom:1px solid #1c1a15;padding:18px 0;">
+<div>
+<div style="font-size:clamp(23px,4.8vw,30px);font-weight:500;line-height:1.1;">Vrydag 30 Oktober 2026</div>
+<div style="font-size:17px;font-weight:300;padding-top:4px;">18:00 vir 18:30 · Stellenbosch United Church</div>
+</div>
+<div style="border-left:clamp(0px,calc((100vw - 620px) * 999),1px) solid #cdc5b4;padding-left:clamp(0px,calc((100vw - 620px) * 999),36px);">
+<div style="font-size:clamp(22px,4.5vw,28px);font-weight:500;line-height:1.15;white-space:nowrap;">R350 <span style="font-size:16px;font-weight:300;">per persoon</span></div>
+<div style="font-size:clamp(22px,4.5vw,28px);font-weight:500;line-height:1.15;white-space:nowrap;">R600 <span style="font-size:16px;font-weight:300;">per paar</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;padding:22px 0 8px;">
+<a href="{{ posterDownload }}" download="song-for-a-century.png" style="border:1px solid #1c1a15;color:#1c1a15;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;" style-hover="background:#eae4d6;">Laai plakkaat af</a>
+<sc-if value="{{ notCopiedCaption }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ copyCaption }}" style="cursor:pointer;border:1px solid #1c1a15;color:#1c1a15;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;" style-hover="background:#eae4d6;">Kopieer byskrif</div>
+</sc-if>
+<sc-if value="{{ copiedCaption }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid #9c4a26;color:#9c4a26;padding:14px clamp(18px,5vw,24px);font-size:16px;font-weight:400;">Byskrif gekopieer</div>
+</sc-if>
+</div>
+
+<img src="assets/colour-church.jpg" alt="Tekening van die Stellenbosch United Church" style="width:100%;max-width:560px;aspect-ratio:0.848;object-fit:cover;object-position:50% 18%;display:block;margin:26px auto -10px;">
+
+<p style="font-size:clamp(17px,2.8vw,21px);font-weight:300;line-height:1.6;max-width:660px;margin:34px 0 60px;text-wrap:pretty;">Honderd jaar nadat hierdie gebou sy deure oopgemaak het, gaan Winand Grundling agter sy orrel sit vir 'n aand van musiek, sang en 'n goeie skoot humor. Hy speel, en hy vertel jou wat jy hoor. Sopraan Annatjie Joubert sluit by hom aan vir die liedere. Kaas en wyn na afloop, en die opbrengs gaan aan die kerk se eeufeesfonds.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBook }}" hint-placeholder-val="{{ false }}">
+<div style="background:#efe9dc;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(36px,8vw,56px);">
+<div style="max-width:1000px;margin:0 auto;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Kaartjies</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 8px;">Hoe om te bespreek</h2>
+<p style="font-size:17px;font-weight:300;line-height:1.6;max-width:620px;margin:0 0 34px;">Vier stappe. <span style="font-weight:500;color:#9c4a26;">LW: lees stap 3 mooi deur.</span> Jou plekke word gehou sodra die betaling reflekteer.</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">1</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Jou besonderhede</div>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Gestuur</div></sc-if>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px;">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Naam
+<input type="text" value="{{ first }}" onChange="{{ setFirst }}" placeholder="Anna" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Van
+<input type="text" value="{{ last }}" onChange="{{ setLast }}" placeholder="Joubert" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">E-pos
+<input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="anna@example.co.za" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Selfoonnommer
+<div style="display:flex;gap:8px;">
+<select value="{{ dial }}" onChange="{{ setDial }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 8px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;flex:0 0 92px;">
+<option value="+27">+27</option>
+<option value="+264">+264</option>
+<option value="+267">+267</option>
+<option value="+44">+44</option>
+<option value="+1">+1</option>
+<option value="+61">+61</option>
+<option value="+31">+31</option>
+<option value="+49">+49</option>
+<option value="+33">+33</option>
+</select>
+<input type="tel" value="{{ wa }}" onChange="{{ setWa }}" placeholder="82 123 4567" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;flex:1 1 auto;min-width:0;">
+</div>
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Plekke
+<select value="{{ seats }}" onChange="{{ setSeats }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+<option value="1">1 &middot; R350</option>
+<option value="2">2 &middot; R600 (paar)</option>
+<option value="3">3 &middot; R950</option>
+<option value="4">4 &middot; R1200</option>
+<option value="5">5 &middot; R1550</option>
+<option value="6">6 &middot; R1800</option>
+</select>
+</label>
+</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">2</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Jou bankbesonderhede</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Jou verwysing vul vanself in uit stap 1. Gebruik dit presies soos dit wys. Die besonderhede hieronder word aan jou ge-e-pos sodra jy die bespreking stuur.</div>
+<div style="background:#1c1a15;color:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:20px 28px;">
+<div style="grid-column:1 / -1;font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#e0a172;">Bankbesonderhede</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Rekeningnaam</div>
+<div style="font-size:18px;font-weight:400;">Stellenbosch United Church</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Bank</div>
+<div style="font-size:18px;font-weight:400;">Standard Bank</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">Stellenbosch, takkode 050610</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Rekeningnommer</div>
+<div style="font-size:18px;font-weight:400;">072269901</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">SWIFT SBZAZAJJ</div>
+</div>
+<div style="grid-column:1 / -1;border-top:1px solid #3a352c;padding-top:18px;display:flex;gap:40px;flex-wrap:wrap;">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Jou verwysing</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;color:#e0a172;">{{ refPreview }}</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">Vul vanself in uit stap 1</div>
+</div>
+<div>
+<div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Bedrag verskuldig</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;">{{ amountDue }}</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">R350 per persoon, R600 per paar</div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+<sc-if value="{{ sendReady }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ doSubmit }}" style="cursor:pointer;background:#1c1a15;color:#f5f1e7;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;" style-hover="background:#332f27;">Stuur my bespreking</div>
+</sc-if>
+<sc-if value="{{ sendBlocked }}" hint-placeholder-val="{{ true }}">
+<div style="background:#ddd5c4;color:#8b8376;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;cursor:not-allowed;">Stuur my bespreking</div>
+<div style="font-size:14px;font-weight:300;color:#6d665c;">Vul eers elke veld in stap 1 in.</div>
+</sc-if>
+<sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
+<div style="background:#6d665c;color:#f5f1e7;padding:14px clamp(20px,5.5vw,30px);font-size:16px;font-weight:500;letter-spacing:0.04em;">Stuur tans...</div>
+</sc-if>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+<div style="font-size:16px;font-weight:400;color:#9c4a26;">Bespreking gestuur. Jou plekke word gehou.</div>
+<div onClick="{{ doReset }}" style="cursor:pointer;border:1px solid #1c1a15;padding:11px 22px;font-size:15px;font-weight:500;" style-hover="background:#eae4d6;">Bespreek nog plekke</div>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:15px;font-weight:400;color:#9c4a26;">Dit het nie deurgekom nie. Probeer weer, of bel die kerkkantoor by 021 887 0495.</div>
+</sc-if>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">3</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Betaal, antwoord dan met die bewys</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;"><span style="font-weight:500;">Antwoord op jou bevestigingse-pos</span> met die bank se bewys van betaling aangeheg. Moenie dit uit jou bankprogram stuur nie: net die antwoord dra jou verwysing saam, en die verwysing is wat die betaling by jou naam pas.</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Kom daar niks binne 15 minute nie, word die plekke vrygestel en moet jy weer bespreek.</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);line-height:0.9;color:#9c4a26;">4</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-size:clamp(19px,3.4vw,22px);font-weight:500;">Jou kaartjie kom</div>
+<div style="font-size:15px;font-weight:300;line-height:1.55;max-width:640px;">Sodra die betaling gepas is, word jou genommerde kaartjie aan jou ge-e-pos, byvoorbeeld JOUBERT-014, as ’n PDF met ’n kalenderlêer. Bring dit saam op die aand, op papier of op jou foon.</div>
+</div>
+</div>
+</div>
+
+<div style="background:#f5f1e7;margin-top:22px;padding:clamp(18px,4.5vw,26px) clamp(16px,4.5vw,30px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+<div style="max-width:600px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(22px,4.5vw,28px);line-height:1.15;">Kan jy nie die aand bywoon nie?</div>
+<div style="font-size:16px;font-weight:300;line-height:1.6;padding-top:6px;">Jy is welkom om die eeufeesfonds direk te ondersteun. Gebruik dieselfde bankbesonderhede met die verwysing <span style="font-weight:500;">SONGFORACENTURY</span>.</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCast }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Die aand se musiek</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 26px;">Kunstenaars</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;">
+<div style="border-top:2px solid #1c1a15;padding-top:16px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Winand Grundling</div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Orrel</div>
+<img src="assets/winand.jpg" alt="Winand Grundling at the console" style="width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 16%;display:block;margin:0 0 16px;">
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Winand Grundling het in 2002 onder Colin Campbell met orrelstudie begin, sy BMus aan die Nelson Mandela Metropolitaanse Universiteit verwerf en sy BMus Hons cum laude aan die Universiteit Stellenbosch onder Mario Nell voltooi. Hy het uitvoerende lisensiate van Trinity en Unisa, albei met onderskeiding, en het by die Haarlem Orrelsomerskool, die Eastman School of Music en die Bach-Akademie in Amsterdam studeer.</p>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">Hy is algehele wenner van die ABSA Nasionale Jeugmusiekkompetisie en van die Unisa- en SAKOV-oorsese beurskompetisies, en het drie Kanna-toekennings: twee in 2012 vir 14 Stasies van die Kruis en een in 2015 vir Bach-Vandag. Hy is orrelis van die NG Kerk Stellenbosch-Welgelegen, speel sedert 2015 Orrelweek by die Woordfees, en toer met sy komedieproduksie A Victor Borge Tribute.</p>
+</div>
+<div style="border-top:2px solid #1c1a15;padding-top:16px;">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.1;">Annatjie Joubert</div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;padding:4px 0 12px;">Sopraan</div>
+<p style="font-size:16px;font-weight:300;line-height:1.6;margin:0 0 10px;">'n Klassiek opgeleide operasangeres wat haar BMus aan Rhodes Universiteit voltooi het. Sy sluit by die orrel aan vir verskeie werke deur die aand.</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProg }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Program</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 20px;">Wat jy gaan hoor</h2>
+<sc-if value="{{ progLocked }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid #cdc5b4;background:#efe9dc;padding:clamp(24px,5.5vw,38px) clamp(18px,5vw,32px);display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9c4a26;">Verskyn op die aand</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,5vw,32px);line-height:1.15;">Die program verskyn hier om 18:30 op Vrydag 30 Oktober 2026</div>
+<div style="font-size:17px;font-weight:300;line-height:1.6;max-width:620px;">Skandeer die QR-kode op jou kaartjie, of maak hierdie bladsy op die aand oop, en die volledige program - werke, komponiste en die liedere wat Annatjie sing - wag vir jou.</div>
+</div>
+</sc-if>
+<sc-if value="{{ progOpen }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;">
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Eerste helfte</div>
+<div style="font-size:18px;font-weight:300;">Orrelwerke, met die volle instrument as opening</div>
+</div>
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Met sopraan</div>
+<div style="font-size:18px;font-weight:300;">Liedere vir stem en orrel, gesing deur Annatjie Joubert</div>
+</div>
+<div style="display:grid;grid-template-columns:clamp(88px,26vw,150px) 1fr;gap:20px;border-top:1px solid #cdc5b4;padding:14px 0;align-items:baseline;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;">Tweede helfte</div>
+<div style="font-size:18px;font-weight:300;">'n Eeufeeslied saam met die gemeente, en 'n slotwerk vir orrel</div>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isChurch }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1000px;margin:0 auto;padding:44px 24px 0;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">1925-2025</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,6.6vw,44px);font-weight:400;line-height:1.05;margin:6px 0 16px;">Kerk</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
+<div>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 12px;text-wrap:pretty;">Die gemeente het in 1899 as 'n Presbiteriaanse gemeente begin en het in 1990 Stellenbosch United Church geword met die plaaslike vereniging met die Uniting Congregational Church of Southern Africa. Dit is 'n multikulturele gemeente met twee kampusse, een in Stellenbosch en een in Kayamandi, wat deur die jaar saam aanbid.</p>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0;text-wrap:pretty;">Die gebou in Van Riebeeckstraat is al 'n eeu lank sy tuiste, en hierdie konsert sluit die eeufeesjaar af. Wat ingesamel word, gaan na die kerk se eeufeesfonds.</p>
+</div>
+<div>
+<p style="font-size:17px;font-weight:300;line-height:1.65;margin:0 0 12px;text-wrap:pretty;">Naas die Sondagdienste bedryf die gemeente die Stellenbosch United Church Education Trust, in 2005 gestig om studente te ondersteun en te mentor wat die eerste in hul familie is om universiteit toe te gaan.</p>
+</div>
+</div>
+</div>
+
+<div style="max-width:1000px;margin:0 auto;padding:clamp(30px,7vw,44px) clamp(16px,4.5vw,24px) clamp(38px,8vw,60px);">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#9c4a26;">Hoe om daar te kom</div>
+<h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,6vw,36px);font-weight:400;line-height:1.05;margin:6px 0 20px;">Van Riebeeckstraat 8</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;align-items:start;">
+<div>
+<div style="font-size:20px;font-weight:400;line-height:1.5;">Stellenbosch-Sentraal, 7600<br>Kerkkantoor 021 887 0495</div>
+<div style="background:#efe9dc;padding:16px 18px;margin-top:18px;">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9c4a26;margin-bottom:6px;">Parkering</div>
+<div style="font-size:16px;font-weight:300;line-height:1.55;">Daar is geen parkering by die kerk nie. Gebruik die kerk se ingang slegs om af te laai. 150m van die kerk, langs De Cameron restaurant, is ‘n groot openbare parkeerterrein.</div>
+</div>
+<a href="{{ mapHref }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">Kry aanwysings</a>
+</div>
+<iframe title="Kaart van Stellenbosch-Sentraal" src="https://www.openstreetmap.org/export/embed.html?bbox=18.8583%2C-33.9399%2C18.8712%2C-33.9329&amp;layer=mapnik&amp;marker=-33.936394%2C18.864728" style="width:100%;height:300px;border:1px solid #cdc5b4;display:block;filter:sepia(0.35) saturate(0.7);"></iframe>
+</div>
+</div>
+</sc-if>
+
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 64px;">
+<div style="border-top:1px solid #1c1a15;padding-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;align-items:start;">
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">Stellenbosch United Church</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">Van Riebeeckstraat 8<br>Stellenbosch-Sentraal, 7600<br>Kerkkantoor 021 887 0495<br>Kantoorure Ma-Vr, 07:30-12:30<br><a href="https://www.stbuc.co.za/" target="_blank" rel="noopener">stbuc.co.za</a></div>
+</div>
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">Kaartjienavrae</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">Skandeer om ons op WhatsApp te kontak.</div>
+<img src="assets/qr-tickets-warm.png" alt="QR-kode om ons op WhatsApp te kontak" style="width:104px;height:104px;display:block;margin-top:10px;mix-blend-mode:multiply;">
+</div>
+<div>
+<div style="font-size:12px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;">Die plakkaat</div>
+<div style="font-size:15px;font-weight:300;line-height:1.6;padding-top:8px;">Druk dit vir jou kennisgewingbord of deel dit.</div>
+<a href="{{ posterHref }}" download="song-for-a-century-poster.pdf" style="display:inline-block;margin-top:10px;font-size:15px;font-weight:500;border-bottom:1px solid #9c4a26;">Laai die plakkaat af</a>
+</div>
+</div>
+</div>
+
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;appsScriptUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://script.google.com/macros/s/AKfycbyMCEW_1pfHseDtRmtAzoDr1nBDm-iFjkprWzQaKyVkpYGXFACN2T6CZ24RNE05fFUPUA/exec&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterPdfUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/poster.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;siteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://suc1925.github.io/song-for-a-century/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterImageUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://suc1925.github.io/song-for-a-century/assets/poster-church.png&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;posterChoice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;church&quot;,&quot;organ&quot;],&quot;default&quot;:&quot;church&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sharing&quot;},&quot;programmeUnlocked&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Programme&quot;}}">
+class Component extends DCLogic {
+  state = {
+    lang: 'en', view: 'home', status: 'idle',
+    first: '', last: '', email: '', wa: '', dial: '+27', seats: '2'
+  };
+
+  toggle(key) {
+    return () => this.setState((s) => ({ [key]: !s[key] }));
+  }
+
+  flash(key) {
+    this.setState({ flash: key });
+    clearTimeout(this._flashT);
+    this._flashT = setTimeout(() => this.setState({ flash: null }), 2200);
+  }
+
+  set(field) {
+    return (e) => this.setState({ [field]: e.target.value });
+  }
+
+  reference() {
+    const clean = (s) => (s || '').trim().toUpperCase().replace(/[^A-Z0-9]+/g, '');
+    const n = Math.max(1, parseInt(this.state.seats, 10) || 1);
+    const first = clean(this.state.first) || 'NAME';
+    const last = clean(this.state.last) || 'SURNAME';
+    return 'SFAC-' + first + '-' + last + '-' + n;
+  }
+
+  /** Every field in step 1 has to be there before the button turns on. */
+  complete() {
+    const s = this.state;
+    const digits = (s.wa || '').replace(/\D/g, '');
+    return !!(s.first.trim() && s.last.trim() &&
+      /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(s.email.trim()) &&
+      digits.length >= 7 && s.seats);
+  }
+
+  /** iPhones open Apple Maps, Android offers whatever map apps are installed. */
+  mapHref() {
+    const lat = -33.936394, lon = 18.864728;
+    const label = 'Stellenbosch United Church, 8 Van Riebeeck Street, Stellenbosch 7600';
+    let ua = '';
+    try { ua = navigator.userAgent || ''; } catch (e) {}
+    if (/iPhone|iPad|iPod|Macintosh/.test(ua)) {
+      return 'https://maps.apple.com/?q=' + encodeURIComponent(label) + '&ll=' + lat + ',' + lon;
+    }
+    if (/Android/.test(ua)) {
+      return 'geo:' + lat + ',' + lon + '?q=' + lat + ',' + lon + '(' + encodeURIComponent(label) + ')';
+    }
+    return 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lon;
+  }
+
+  endpoint() {
+    return (this.props.appsScriptUrl ||
+      'https://script.google.com/macros/s/AKfycbyMCEW_1pfHseDtRmtAzoDr1nBDm-iFjkprWzQaKyVkpYGXFACN2T6CZ24RNE05fFUPUA/exec').trim();
+  }
+
+  siteUrl() {
+    const u = (this.props.siteUrl || 'https://suc1925.github.io/song-for-a-century/').trim();
+    if (u) return u.replace(/\/$/, '');
+    try { return location.origin + location.pathname.replace(/[^/]*$/, ''); } catch (e) { return ''; }
+  }
+
+  posterUrl() {
+    const p = (this.props.posterImageUrl || '').trim();
+    if (p) return p;
+    const base = this.siteUrl();
+    return base ? base.replace(/\/$/, '') + '/assets/poster-church.png' : 'assets/poster-church.png';
+  }
+
+  shareText(af) {
+    const site = this.siteUrl();
+    const en = 'Song for a Century - a centenary organ concert at Stellenbosch United Church. '
+      + 'Winand Grundling at the organ, with Annatjie Joubert, soprano. '
+      + 'Friday 30 October 2026, 18:00 for 18:30. Cheese and wine to follow. R350 per person, R600 per couple.';
+    const afr = 'Song for a Century - eeufeeskonsert by Stellenbosch United Church. '
+      + 'Winand Grundling by die orrel, met Annatjie Joubert, sopraan. '
+      + 'Vrydag 30 Oktober 2026, 18:00 vir 18:30. Kaas en wyn na afloop. R350 per persoon, R600 per paar.';
+    return (af ? afr : en) + (site ? '\n' + site : '');
+  }
+
+  amount() {
+    const n = Math.max(1, parseInt(this.state.seats, 10) || 1);
+    return Math.floor(n / 2) * 600 + (n % 2) * 350;
+  }
+
+  submit() {
+    const url = this.endpoint();
+    const s = this.state;
+    if (!s.first.trim() || !s.last.trim() || !s.email.trim()) {
+      this.setState({ status: 'missing' });
+      return;
+    }
+    if (!url) { this.setState({ status: 'nourl' }); return; }
+    this.setState({ status: 'sending' });
+    const body = new URLSearchParams({
+      first: s.first.trim(), last: s.last.trim(), email: s.email.trim(),
+      wa: (s.dial + ' ' + s.wa).trim(), seats: String(Math.max(1, parseInt(s.seats, 10) || 1)),
+      reference: this.reference(), amount: String(this.amount())
+    });
+    fetch(url, { method: 'POST', mode: 'no-cors', body })
+      .then(() => { this.setState({ status: 'sent' }); this.holdThenClear(); })
+      .catch(() => this.setState({ status: 'error' }));
+  }
+
+  resetForm() {
+    clearTimeout(this._clearT);
+    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', dial: '+27', seats: '2' });
+  }
+
+  /** A sent booking clears itself after an hour so the next visitor starts fresh. */
+  holdThenClear() {
+    clearTimeout(this._clearT);
+    this._clearT = setTimeout(() => this.resetForm(), 60 * 60 * 1000);
+  }
+
+  componentWillUnmount() { clearTimeout(this._clearT); clearTimeout(this._flashT); }
+
+  go(view) {
+    if (this.state.status === 'sent') this.resetForm();
+    this.setState({ view });
+    window.scrollTo(0, 0);
+  }
+
+  renderVals() {
+    const v = this.state.view;
+    const on = '#9c4a26', off = 'transparent';
+    const form = (this.props.bookingFormUrl || '').trim();
+    const poster = (this.props.posterPdfUrl || '').trim();
+    const doorsOpen = Date.parse('2026-10-30T18:30:00+02:00');
+    const open = this.props.programmeUnlocked === true || Date.now() >= doorsOpen;
+    return {
+      isEn: this.state.lang === 'en',
+      isAf: this.state.lang === 'af',
+      setEn: () => this.setState({ lang: 'en' }),
+      setAf: () => this.setState({ lang: 'af' }),
+      isHome: v === 'home', isBook: v === 'book',
+      isCast: v === 'cast', isProg: v === 'prog', isChurch: v === 'church',
+      navHome: v === 'home' ? on : off, navBook: v === 'book' ? on : off,
+      navCast: v === 'cast' ? on : off,
+      navProg: v === 'prog' ? on : off, navChurch: v === 'church' ? on : off,
+      goHome: () => this.go('home'), goBook: () => this.go('book'),
+      goCast: () => this.go('cast'),
+      goProg: () => this.go('prog'), goChurch: () => this.go('church'),
+      bookingHref: form || '#booking-form-link',
+      posterHref: poster || ((this.props.posterChoice === 'organ') ? 'assets/poster-organ.png' : 'assets/poster-church.png'),
+      mapHref: this.mapHref(),
+      dial: this.state.dial, setDial: this.set('dial'),
+      sendReady: this.state.status !== 'sent' && this.state.status !== 'sending' && this.complete(),
+      sendBlocked: this.state.status !== 'sent' && this.state.status !== 'sending' && !this.complete(),
+      noForm: !form,
+      progOpen: open, progLocked: !open,
+      first: this.state.first, last: this.state.last, email: this.state.email,
+      wa: this.state.wa, seats: this.state.seats,
+      setFirst: this.set('first'), setLast: this.set('last'),
+      setEmail: this.set('email'), setWa: this.set('wa'), setSeats: this.set('seats'),
+      refPreview: this.reference(), amountDue: 'R' + this.amount(),
+      doSubmit: () => this.submit(),
+      doReset: () => this.resetForm(),
+      formOpen: this.state.status !== 'sent',
+      sending: this.state.status === 'sending',
+      notSending: this.state.status !== 'sending',
+      sent: this.state.status === 'sent',
+      failed: this.state.status === 'error',
+      noEndpoint: this.state.status === 'nourl' || !this.endpoint(),
+      copyCaption: () => {
+        const text = this.shareText(this.state.lang === 'af');
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => this.flash('caption'), () => {});
+      },
+      copiedCaption: this.state.flash === 'caption',
+      notCopiedCaption: this.state.flash !== 'caption',
+      posterDownload: (this.props.posterChoice === 'organ') ? 'assets/poster-organ.png' : 'assets/poster-church.png',
+      notSent: this.state.status !== 'sent'
+    };
+  }
+}
+</script>
+</body>
+</html>
