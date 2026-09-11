@@ -152,19 +152,21 @@ a:hover{color:#7d3a1d}
 </label>
 <label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Seats
 <select value="{{ seats }}" onChange="{{ setSeats }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
-<option value="1">1 &middot; R350</option>
-<option value="2">2 &middot; R600 (couple)</option>
-<option value="3">3 &middot; R950</option>
-<option value="4">4 &middot; R1200</option>
-<option value="5">5 &middot; R1550</option>
-<option value="6">6 &middot; R1800</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Pensioners
+<select value="{{ pens }}" onChange="{{ setPens }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+<sc-for list="{{ pensOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.label }}</option></sc-for>
 </select>
 </label>
 </div>
-<label style="display:flex;align-items:flex-start;gap:11px;cursor:pointer;font-size:15px;font-weight:300;line-height:1.5;color:#1c1a15;">
-<input type="checkbox" checked="{{ pensioner }}" onChange="{{ setPensioner }}" style="width:17px;height:17px;margin-top:3px;accent-color:#9c4a26;flex:none;">
-<span>Pensioner rate, R250 a seat.<span style="color:#6d665c;"> Tick this if everyone in the booking is a pensioner. We check it at the door, not online.</span></span>
-</label>
+<div style="font-size:15px;font-weight:300;line-height:1.55;color:#6d665c;">Pensioners pay R250 a seat. The rest of the booking is R350 each, or R600 a couple. We check this at the door, not online.</div>
 </div>
 </div>
 
@@ -198,7 +200,7 @@ a:hover{color:#7d3a1d}
 <div>
 <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Amount due</div>
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;">{{ amountDue }}</div>
-<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">R350 per person, R600 per couple, R250 per pensioner</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">{{ breakdown }}</div>
 </div>
 </div>
 </div>
@@ -482,19 +484,21 @@ a:hover{color:#7d3a1d}
 </label>
 <label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Plekke
 <select value="{{ seats }}" onChange="{{ setSeats }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
-<option value="1">1 &middot; R350</option>
-<option value="2">2 &middot; R600 (paar)</option>
-<option value="3">3 &middot; R950</option>
-<option value="4">4 &middot; R1200</option>
-<option value="5">5 &middot; R1550</option>
-<option value="6">6 &middot; R1800</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#6d665c;">Pensioenarisse
+<select value="{{ pens }}" onChange="{{ setPens }}" style="font-family:Jost,sans-serif;font-size:17px;font-weight:300;padding:11px 12px;border:1px solid #cdc5b4;background:#fffdf8;color:#1c1a15;">
+<sc-for list="{{ pensOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.label }}</option></sc-for>
 </select>
 </label>
 </div>
-<label style="display:flex;align-items:flex-start;gap:11px;cursor:pointer;font-size:15px;font-weight:300;line-height:1.5;color:#1c1a15;">
-<input type="checkbox" checked="{{ pensioner }}" onChange="{{ setPensioner }}" style="width:17px;height:17px;margin-top:3px;accent-color:#9c4a26;flex:none;">
-<span>Pensioenaristarief, R250 per plek.<span style="color:#6d665c;"> Merk dit as almal in die bespreking pensioenarisse is. Ons kyk daarna by die deur, nie aanlyn nie.</span></span>
-</label>
+<div style="font-size:15px;font-weight:300;line-height:1.55;color:#6d665c;">Pensioenarisse betaal R250 per plek. Die res van die bespreking is R350 elk, of R600 per paar. Ons kyk daarna by die deur, nie aanlyn nie.</div>
 </div>
 </div>
 
@@ -528,7 +532,7 @@ a:hover{color:#7d3a1d}
 <div>
 <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a49a8c;margin-bottom:4px;">Bedrag verskuldig</div>
 <div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,4.8vw,30px);line-height:1.1;">{{ amountDue }}</div>
-<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">R350 per persoon, R600 per paar, R250 per pensioenaris</div>
+<div style="font-size:14px;font-weight:300;color:#c8bfb0;padding-top:4px;">{{ breakdown }}</div>
 </div>
 </div>
 </div>
@@ -702,7 +706,7 @@ a:hover{color:#7d3a1d}
 class Component extends DCLogic {
   state = {
     lang: 'en', view: 'home', status: 'idle',
-    first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pensioner: false
+    first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0'
   };
 
   toggle(key) {
@@ -780,10 +784,38 @@ class Component extends DCLogic {
     return (af ? afr : en) + (site ? '\n' + site : '');
   }
 
+  seatCount() {
+    return Math.max(1, parseInt(this.state.seats, 10) || 1);
+  }
+
+  pensCount() {
+    return Math.min(this.seatCount(), Math.max(0, parseInt(this.state.pens, 10) || 0));
+  }
+
+  pensOptions() {
+    const out = [];
+    for (let i = 0; i <= this.seatCount(); i++) {
+      out.push({ v: String(i), label: i === 0 ? (this.state.lang === 'af' ? 'Geen' : 'None') : String(i) });
+    }
+    return out;
+  }
+
+  breakdown() {
+    const af = this.state.lang === 'af';
+    const p = this.pensCount();
+    const rest = this.seatCount() - p;
+    const pairs = Math.floor(rest / 2);
+    const parts = [];
+    if (p) parts.push(p + ' \u00d7 R250 ' + (af ? 'pensioenaris' : 'pensioner'));
+    if (pairs) parts.push(pairs + ' \u00d7 R600 ' + (af ? 'paar' : 'couple'));
+    if (rest % 2) parts.push('1 \u00d7 R350');
+    return parts.join('  +  ');
+  }
+
   amount() {
-    const n = Math.max(1, parseInt(this.state.seats, 10) || 1);
-    if (this.state.pensioner) return n * 250;
-    return Math.floor(n / 2) * 600 + (n % 2) * 350;
+    const p = this.pensCount();
+    const rest = this.seatCount() - p;
+    return p * 250 + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
   }
 
   submit() {
@@ -799,7 +831,8 @@ class Component extends DCLogic {
       first: s.first.trim(), last: s.last.trim(), email: s.email.trim(),
       wa: (s.dial + ' ' + s.wa).trim(), seats: String(Math.max(1, parseInt(s.seats, 10) || 1)),
       reference: this.reference(), amount: String(this.amount()),
-      pensioner: s.pensioner ? 'yes' : ''
+      pensioners: String(this.pensCount()),
+      pensioner: this.pensCount() > 0 ? 'yes' : ''
     });
     fetch(url, { method: 'POST', mode: 'no-cors', body })
       .then(() => { this.setState({ status: 'sent' }); this.holdThenClear(); })
@@ -808,7 +841,7 @@ class Component extends DCLogic {
 
   resetForm() {
     clearTimeout(this._clearT);
-    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pensioner: false });
+    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0' });
   }
 
   /** A sent booking clears itself after an hour so the next visitor starts fresh. */
@@ -854,11 +887,13 @@ class Component extends DCLogic {
       noForm: !form,
       progOpen: open, progLocked: !open,
       first: this.state.first, last: this.state.last, email: this.state.email,
-      wa: this.state.wa, seats: this.state.seats, pensioner: this.state.pensioner,
+      wa: this.state.wa, seats: this.state.seats,
+      pens: String(this.pensCount()), pensOptions: this.pensOptions(),
       setFirst: this.set('first'), setLast: this.set('last'),
       setEmail: this.set('email'), setWa: this.set('wa'), setSeats: this.set('seats'),
-      setPensioner: (e) => this.setState({ pensioner: !!(e && e.target ? e.target.checked : !this.state.pensioner) }),
+      setPens: this.set('pens'),
       refPreview: this.reference(), amountDue: 'R' + this.amount(),
+      breakdown: this.breakdown(),
       doSubmit: () => this.submit(),
       doReset: () => this.resetForm(),
       formOpen: this.state.status !== 'sent',
