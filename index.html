@@ -913,8 +913,15 @@ class Component extends DCLogic {
       pensioners: String(this.pensCount()),
       pensioner: this.pensCount() > 0 ? 'yes' : ''
     });
-    fetch(url, { method: 'POST', mode: 'no-cors', body })
-      .then(() => { this.setState({ status: 'sent' }); this.holdThenClear(); })
+    // Apps Script answers 'ok', 'ok-no-email' or 'updated' once the booking is on
+    // the sheet, so only those count as sent. A repeat after an error is safe: the
+    // script updates the same booking instead of adding a second one.
+    fetch(url, { method: 'POST', body })
+      .then((r) => r.text())
+      .then((t) => {
+        if (/^(ok|updated)/.test(t)) { this.setState({ status: 'sent' }); this.holdThenClear(); }
+        else this.setState({ status: 'error' });
+      })
       .catch(() => this.setState({ status: 'error' }));
   }
 
