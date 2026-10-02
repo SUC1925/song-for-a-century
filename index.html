@@ -303,7 +303,7 @@ a:hover{color:#7d3a1d}
 </div>
 
 <sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
-<div style="font-size:15px;font-weight:400;color:#9c4a26;">That didn't go through. Please try again, or phone the church office on 021 887 0495.</div>
+<div style="font-size:15px;font-weight:400;color:#9c4a26;">That didn't go through. Please try again, or tap the <a href="https://wa.me/27764993166" style="color:#9c4a26;text-decoration:underline;">WhatsApp code</a> under Ticket enquiries at the bottom of this page and we'll help you.</div>
 </sc-if>
 </div>
 </div>
@@ -635,7 +635,7 @@ a:hover{color:#7d3a1d}
 </div>
 
 <sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
-<div style="font-size:15px;font-weight:400;color:#9c4a26;">Dit het nie deurgekom nie. Probeer weer, of bel die kerkkantoor by 021 887 0495.</div>
+<div style="font-size:15px;font-weight:400;color:#9c4a26;">Dit het nie deurgekom nie. Probeer weer, of tik op die <a href="https://wa.me/27764993166" style="color:#9c4a26;text-decoration:underline;">WhatsApp-kode</a> onder Kaartjienavrae onderaan hierdie bladsy, dan help ons jou.</div>
 </sc-if>
 </div>
 </div>
@@ -913,8 +913,15 @@ class Component extends DCLogic {
       pensioners: String(this.pensCount()),
       pensioner: this.pensCount() > 0 ? 'yes' : ''
     });
-    fetch(url, { method: 'POST', mode: 'no-cors', body })
-      .then(() => { this.setState({ status: 'sent' }); this.holdThenClear(); })
+    // Apps Script answers 'ok', 'ok-no-email' or 'updated' once the booking is on
+    // the sheet, so only those count as sent. A repeat after an error is safe: the
+    // script updates the same booking instead of adding a second one.
+    fetch(url, { method: 'POST', body })
+      .then((r) => r.text())
+      .then((t) => {
+        if (/^(ok|updated)/.test(t)) { this.setState({ status: 'sent' }); this.holdThenClear(); }
+        else this.setState({ status: 'error' });
+      })
       .catch(() => this.setState({ status: 'error' }));
   }
 
