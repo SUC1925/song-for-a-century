@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  body { margin:0; background:#f5f1e7; color:#1c1a15; font-family:Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1240px; margin:0 auto; padding:26px 22px 70px; }
+  .eyebrow { font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#9c4a26; }
+  h1 { font-family:Georgia,serif; font-weight:400; font-size:32px; margin:4px 0 0; }
+  .bar { display:flex; flex-wrap:wrap; gap:26px; align-items:flex-end; justify-content:space-between; padding:18px 0 14px; }
+  .stats { display:flex; gap:30px; }
+  .stat .k { font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#6b6355; }
+  .stat .v { font-family:Georgia,serif; font-size:26px; line-height:1.1; }
+  .acts { display:flex; gap:10px; }
+  button { font-family:inherit; font-size:13px; padding:9px 15px; border:1px solid #1c1a15;
+           background:transparent; color:#1c1a15; cursor:pointer; }
+  button:hover { background:#1c1a15; color:#f5f1e7; }
+  button.go { background:#9c4a26; border-color:#9c4a26; color:#fff; }
+  button.go:hover { background:#7d3a1d; }
+  button:disabled { opacity:0.35; cursor:default; }
+  table { width:100%; border-collapse:collapse; font-size:14px; background:#fffdf8; }
+  th { text-align:left; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#6b6355;
+       border-bottom:1px solid #d8d0c0; padding:10px 12px; font-weight:600; }
+  td { border-bottom:1px solid #eae3d5; padding:11px 12px; vertical-align:top; }
+  tr.done td { background:#f2f6f0; }
+  .ref { font-family:'Courier New',monospace; font-size:12px; color:#6b6355; }
+  .nm { font-weight:600; }
+  .sub { font-size:12px; color:#6b6355; }
+  .tick { color:#3f6b3a; font-weight:600; }
+  .wait { color:#9c4a26; }
+  .tno { font-family:Georgia,serif; font-size:17px; }
+  a { color:#9c4a26; }
+  .proof { display:block; font-size:13px; padding-top:3px; }
+  .msg { padding:12px 14px; background:#1c1a15; color:#f5f1e7; font-size:13px; margin:0 0 14px; display:none; }
+  .empty { padding:40px; text-align:center; color:#6b6355; font-size:14px; background:#fffdf8; }
+  .row-acts { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Stellenbosch United Church &middot; 1925&ndash;2025</div>
+  <h1>Song for a Century &mdash; bookings</h1>
+
+  <div class="bar">
+    <div class="stats">
+      <div class="stat"><div class="k">Seats booked</div><div class="v" id="s-all">-</div></div>
+      <div class="stat"><div class="k">Seats paid</div><div class="v" id="s-paid">-</div></div>
+      <div class="stat"><div class="k">Received</div><div class="v" id="s-money">-</div></div>
+    </div>
+    <div class="acts">
+      <span class="fresh" id="fresh"></span>
+    </div>
+  </div>
+
+  <div class="msg" id="msg"></div>
+  <div id="body"><div class="empty">Loading&hellip;</div></div>
+</div>
+
+<script>
+  var KEY = '<?= key ?>';
+  var busy = false;
+
+  function note(t) {
+    var m = document.getElementById('msg');
+    m.innerHTML = t; m.style.display = t ? 'block' : 'none';
+  }
+  function money(n) { return 'R' + (n || 0).toLocaleString('en-ZA'); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c];
+    });
+  }
+
+  function proofCell(b) {
+    var h = b.pop ? '<span class="tick">' + esc(b.pop) + '</span>'
+                  : '<span class="wait">waiting</span>';
+    b.popFiles.forEach(function (u, i) {
+      h += '<a class="proof" href="' + esc(u) + '" target="_blank">View proof' +
+           (b.popFiles.length > 1 ? ' ' + (i + 1) : '') + '</a>';
+    });
+    if (b.popMail) h += '<a class="proof" href="' + esc(b.popMail) + '" target="_blank">Open the email</a>';
+    return h;
+  }
+
+  function render(d) {
+    document.body.setAttribute('data-dry', d.dryRun ? '1' : '0');
+    if (d.dryRun) note('Dry run is ON - everything here is test data.');
+    stamp();
+    document.getElementById('s-all').textContent = d.seatsAll;
+    document.getElementById('s-paid').textContent = d.seatsPaid;
+    document.getElementById('s-money').textContent = money(d.moneyIn);
+
+    if (!d.list.length) {
+      document.getElementById('body').innerHTML = '<div class="empty">No bookings yet.</div>';
+      return;
+    }
+    var h = '<table><thead><tr><th>Booking</th><th>Seats</th><th>Due</th>' +
+            '<th>Proof of payment</th><th>Ticket</th><th></th></tr></thead><tbody>';
+    d.list.forEach(function (b) {
+      h += '<tr class="' + (b.sent ? 'done' : '') + '">' +
+        '<td><div class="nm">' + esc(b.name) + '</div>' +
+          '<div class="sub">' + esc(b.email) + (b.wa ? ' &middot; ' + esc(b.wa) : '') + '</div>' +
+          '<div class="ref">' + esc(b.ref) + '</div></td>' +
+        '<td>' + esc(b.seats) + '</td>' +
+        '<td>' + money(b.amount) + '</td>' +
+        '<td>' + proofCell(b) + '</td>' +
+        '<td>' + (b.ticket ? '<div class="tno">' + esc(b.ticket) + '</div>' : '') +
+          (b.sent ? '<div class="sub">sent ' + esc(b.sent) + '</div>' : '') +
+          (b.ticketFile ? '<a class="proof" href="' + esc(b.ticketFile) + '" target="_blank">Open the ticket</a>' : '') +
+        '</td>' +
+        '<td><div class="row-acts">' +
+          (b.sent
+            ? '<button data-act="reticket" data-row="' + b.row + '">Send the ticket again</button>' +
+              '<button data-act="resend" data-row="' + b.row + '">Resend booking email</button>'
+            : '<button class="go" data-act="ticket" data-row="' + b.row + '">Confirm &amp; send ticket</button>' +
+              (b.pop
+                ? '<button data-act="unpaid" data-row="' + b.row + '">Undo proof</button>'
+                : '<button data-act="paid" data-row="' + b.row + '">Mark paid only</button>')) +
+        '</div></td></tr>';
+    });
+    document.getElementById('body').innerHTML = h + '</tbody></table>';
+  }
+
+  function done(d) {
+    clearWatch();
+    busy = false;
+    if (d.dryMsg) note(esc(d.dryMsg));
+    if (d.scan) {
+      note('Scanned ' + d.scan.scanned + ' email threads. ' + d.scan.matched +
+           ' new proofs matched, ' + d.scan.files + ' file(s) filed to Drive, ' +
+           d.scan.filed + ' email(s) moved out of the inbox, ' +
+           d.scan.unmatched + ' could not be matched - those stay in your inbox under <b>Unmatched</b>.');
+    }
+    render(d);
+  }
+  function failed(e) { clearWatch(); busy = false; note(esc(e && e.message ? e.message : e)); }
+
+  // Long jobs (making a PDF, sending mail) sometimes finish on the server without
+  // the reply reaching this page. Rather than sit on "sending", re-read the sheet.
+  var watch = null;
+  function clearWatch() { if (watch) { clearTimeout(watch); watch = null; } }
+
+  function call(fn) {
+    if (busy) return;
+    busy = true;
+    clearWatch();
+    if (fn !== 'listBookings') {
+      watch = setTimeout(function () {
+        watch = null; busy = false;
+        note('The reply did not come back. Checking what actually went through&hellip;');
+        call('listBookings');
+      }, 20000);
+    }
+    var args = [KEY].concat(Array.prototype.slice.call(arguments, 1));
+    var r = google.script.run.withSuccessHandler(done).withFailureHandler(failed);
+    r[fn].apply(r, args);
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('button[data-act]') : null;
+    if (!b) return;
+    var row = Number(b.getAttribute('data-row'));
+    var act = b.getAttribute('data-act');
+    var who = b.closest('tr').querySelector('.nm').textContent;
+    var ask = {
+      ticket:  'Send ' + who + ' their numbered ticket?\n\nThis confirms the payment and emails the ticket.',
+      reticket:'Send ' + who + ' the same ticket again?\n\nThey will receive a second copy of the same email.',
+      resend:  'Send ' + who + ' the booking email again?\n\nIt repeats the amount, the banking details and the reference.',
+      paid:    'Mark ' + who + ' as paid?\n\nNo email goes out. Use this when you have seen the money but no proof came by email.',
+      unpaid:  'Undo the proof for ' + who + '?\n\nThe payment date is cleared and the booking goes back to waiting.'
+    }[act];
+    if (ask && !confirm(ask)) return;
+    if (act === 'ticket') { note('Making the ticket and sending&hellip;'); call('sendTicket', row); }
+    else if (act === 'reticket') { note('Sending&hellip;'); call('resendTicket', row); }
+    else if (act === 'paid') { note('Marking paid&hellip;'); call('markPaid', row); }
+    else if (act === 'unpaid') { note('Clearing the proof&hellip;'); call('unmarkPaid', row); }
+    else if (act === 'resend') { note('Resending&hellip;'); call('resendBookingEmail', row); }
+  });
+
+  // Payments are checked automatically: the script's own trigger runs every five
+  // minutes whether or not anyone is looking, and this page sweeps on the same
+  // rhythm while it is open. There is nothing to press.
+  setInterval(function () { if (!busy) call('runScan'); }, 300000);
+  setTimeout(function () { if (!busy) call('runScan'); }, 4000);
+
+  // The sheet is not live, so the page re-reads it on a quiet loop instead of
+  // making Anika press Reload.
+  function stamp() {
+    var t = new Date();
+    document.getElementById('fresh').textContent = 'Checking for payments automatically \u00b7 updated ' +
+      ('0' + t.getHours()).slice(-2) + ':' + ('0' + t.getMinutes()).slice(-2);
+  }
+  setInterval(function () { if (!busy) call('listBookings'); }, 60000);
+
+  call('listBookings');
+</script>
+</body>
+</html>
