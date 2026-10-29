@@ -102,6 +102,11 @@
       </label>
     </div>
 
+    <label class="f" id="f-spons-wrap" style="display:none;flex-direction:row;align-items:center;gap:10px;">
+      <input id="f-spons" type="checkbox" style="width:20px;height:20px;margin:0;">
+      <span>Sponsored pensioner ticket &mdash; they pay R125 each, the rest is sponsored</span>
+    </label>
+
     <div class="rate">
       <div class="k">Normal price</div>
       <div class="v" id="f-due">R600</div>
@@ -174,19 +179,21 @@
     F('f-pens').innerHTML = h;
   }
 
-  function priceWith(seats, pens) {
+  function priceWith(seats, pens, spons) {
     var p = Math.min(seats, Math.max(0, pens));
     var rest = seats - p;
-    return p * 250 + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
+    return p * (spons ? 125 : 250) + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
   }
 
   function refreshDue() {
     var seats = seatCount();
     var pens = Math.min(seats, Math.max(0, parseInt(F('f-pens').value, 10) || 0));
-    var due = priceWith(seats, pens);
+    F('f-spons-wrap').style.display = pens ? 'flex' : 'none';
+    var spons = pens > 0 && F('f-spons').checked;
+    var due = priceWith(seats, pens, spons);
     F('f-due').textContent = money(due);
     var bits = [];
-    if (pens) bits.push(pens + ' \u00d7 R250');
+    if (pens) bits.push(pens + (spons ? ' \u00d7 R125 sponsored' : ' \u00d7 R250'));
     var rest = seats - pens;
     if (Math.floor(rest / 2)) bits.push(Math.floor(rest / 2) + ' \u00d7 R600');
     if (rest % 2) bits.push('1 \u00d7 R350');
@@ -196,6 +203,7 @@
 
   F('f-seats').onchange = function () { fillPens(); refreshDue(); };
   F('f-pens').onchange = refreshDue;
+  F('f-spons').onchange = refreshDue;
   F('f-paid').onchange = function () {
     F('f-how').disabled = F('f-paid').value !== '1';
   };
@@ -260,6 +268,7 @@
     F('f-paid').value = '1';
     F('f-how').value = 'Cash';
     F('f-how').disabled = false;
+    F('f-spons').checked = false;
     fillPens(); refreshDue();
   }
 
@@ -299,6 +308,7 @@
       email: F('f-email').value, wa: F('f-wa').value,
       seats: F('f-seats').value, pensioners: F('f-pens').value,
       amount: F('f-amount').value, note: F('f-note').value,
+      sponsored: F('f-spons').checked && parseInt(F('f-pens').value, 10) > 0,
       how: F('f-paid').value === '1' ? F('f-how').value : '',
       paid: F('f-paid').value === '1'
     };

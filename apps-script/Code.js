@@ -14,10 +14,10 @@ const CONFIG = {
   REPLY_TO:      '',                             // blank = the script owner (you)
   SENDER_NAME:   'Stellenbosch United Church',
   SITE_URL:      'https://suc1925.github.io/song-for-a-century/',
-  ADMIN_KEY:     'abaed2b046b9f71bf029ff3d72210f70', // console is at ?key=...  (rotateKeys overrides)
-  OFFICE_KEY:    'f71c7ceb5129d108c29618a33bf45637', // office page is at ?desk=... (rotateKeys overrides)
+  // The console and desk keys live only in Script Properties (run rotateKeys).
+  // This file is in a public repository, so no key is ever written here.
   POP_SEARCH:    '"SFAC-" -from:me newer_than:120d', // our own mail carries SFAC- too; guests' replies are what count
-  BUILD:         '2026-10-02-sec3',              // statusCheck prints this - compare it to what I gave you
+  BUILD:         '2026-10-29-sponsored',              // statusCheck prints this - compare it to what I gave you
   ROOT_LABEL:    'Song for a Century',
   DRIVE_FOLDER:  'Song for a Century'
 };
@@ -147,9 +147,12 @@ function recordRun_(name, how, job) {
   }
 }
 
-/** Keys live in Script Properties once rotateKeys has run; CONFIG is only the fallback. */
-function adminKey_()  { return props_().getProperty('ADMIN_KEY')  || CONFIG.ADMIN_KEY; }
-function officeKey_() { return props_().getProperty('OFFICE_KEY') || CONFIG.OFFICE_KEY; }
+/** Keys live only in Script Properties. Until rotateKeys has run, nothing opens. */
+function adminKey_()  { return props_().getProperty('ADMIN_KEY')  || ''; }
+function officeKey_() { return props_().getProperty('OFFICE_KEY') || ''; }
+
+/** True only for a non-empty key that matches, so a missing property never means "no key needed". */
+function keyOk_(given, want) { return !!want && String(given || '') === want; }
 
 /** Guests type their own names, so anything they send is escaped before it goes into HTML. */
 function h_(s) {
@@ -168,6 +171,34 @@ function inbound_(thread) {
   return thread.getMessages().filter(function (m) { return !fromUs_(m); });
 }
 function notifyTo_() { return CONFIG.NOTIFY_EMAIL || owner_(); }
+
+/** Gmail ignores dots and anything after + in the local part, so compare addresses that way. */
+function normEmail_(e) {
+  const m = String(e || '').toLowerCase().trim().match(/^([^@\s]+)@([^@\s]+)$/);
+  if (!m) return String(e || '').toLowerCase().trim();
+  let local = m[1].replace(/\+.*$/, '');
+  if (m[2] === 'gmail.com' || m[2] === 'googlemail.com') local = local.replace(/\./g, '');
+  return local + '@' + m[2];
+}
+
+/** The office's own addresses: you and everyone on NOTIFY_EMAIL. */
+function staffEmails_() {
+  return String(notifyTo_() + ',' + owner_()).split(/[,;\s]+/)
+    .filter(function (s) { return s.indexOf('@') > 0; }).map(normEmail_);
+}
+
+/**
+ * An office booking taken for someone without email often carries a staff
+ * address. Mail from staff is their own mail, never a guest's proof, so a
+ * booking under a staff address is never matched by sender.
+ */
+function isStaff_(e) { return staffEmails_().indexOf(normEmail_(e)) !== -1; }
+
+/** When the booking was made, as milliseconds, or 0 if the cell is unreadable. */
+function bookedAt_(r) {
+  const t = (r.ts instanceof Date) ? r.ts.getTime() : Date.parse(r.ts);
+  return t || 0;
+}
 function replyTo_()  { return CONFIG.REPLY_TO || owner_(); }
 
 /* ------------------------------------------------------------------ sheet */
@@ -278,7 +309,27 @@ function rootFolder_() {
 }
 
 /** Dry-run files live in their own folders so clearing them can never touch the real ones. */
-function proofsFolder_()  { return folder_()(isDryRun_() ? 'Proofs of payment (test)' : 'Proofs of payment'); }
+function proofsFolder_() {
+  const f = folder_()(isDryRun_() ? 'Proofs of payment (test)' : 'Proofs of payment');
+  shareWithStaff_(f);
+  return f;
+}
+
+/**
+ * Proofs are bank documents, so they are shared with the office by name, not
+ * with anyone holding the link. Done once per folder; Drive may email Anika
+ * once to say the folder was shared with her.
+ */
+function shareWithStaff_(folder) {
+  const flag = 'STAFF_SHARED_' + folder.getId();
+  if (props_().getProperty(flag)) return;
+  const me = normEmail_(owner_());
+  String(notifyTo_()).split(/[,;\s]+/).forEach(function (e) {
+    if (e.indexOf('@') < 1 || normEmail_(e) === me) return;
+    try { folder.addViewer(e.trim()); } catch (err) { Logger.log('Could not share proofs with ' + e + ': ' + err); }
+  });
+  props_().setProperty(flag, '1');
+}
 function ticketsFolder_() { return folder_()(isDryRun_() ? 'Tickets (test)' : 'Tickets'); }
 
 function folder_() {
@@ -294,17 +345,23 @@ function shareLink_(file) {
   return file.getUrl();
 }
 
-/** Copies a thread's attachments to Drive, returns a link Anika can open. */
-function saveProof_(thread, ref) {
+/** A proof stays private: only the owner and the staff the folder is shared with can open it. */
+function privateLink_(file) {
+  try { file.setSharing(DriveApp.Access.PRIVATE, DriveApp.Permission.NONE); } catch (e) {}
+  return file.getUrl();
+}
+
+/** Copies the attachments of the given messages to Drive, returns links Anika can open. */
+function saveProof_(msgs, ref) {
   const sub = proofsFolder_();
   const links = [];
-  inbound_(thread).forEach(function (m) {
+  msgs.forEach(function (m) {
     m.getAttachments({ includeInlineImages: true }).forEach(function (a) {
       if (a.getSize() > 12 * 1024 * 1024) return;
       if (a.getSize() < 8 * 1024) return;   // signature logos and other decoration
       const name = ref + ' - ' + a.getName();
       const existing = sub.getFilesByName(name);
-      links.push(shareLink_(existing.hasNext() ? existing.next() : sub.createFile(a.copyBlob().setName(name))));
+      links.push(privateLink_(existing.hasNext() ? existing.next() : sub.createFile(a.copyBlob().setName(name))));
     });
   });
   return links.join('\n');
@@ -475,9 +532,11 @@ function doPost(e) {
     // can post anything, so both are worked out again here the same way.
     const seats  = Math.max(1, parseInt(p.seats, 10) || 1);
     const pens   = Math.min(seats, Math.max(0, parseInt(p.pensioners, 10) || 0));
-    const amount = priceWith_(seats, pens);
+    const sponsored = pens > 0 && String(p.sponsored || '') === 'yes';
+    const amount = priceWith_(seats, pens, sponsored);
     const b = { first: first, last: last, email: email, wa: String(p.wa || '').trim(),
-                seats: seats, amount: amount, ref: webRef_(first, last, seats) };
+                seats: seats, amount: amount, ref: webRef_(first, last, seats),
+                spons: sponsored ? pens : 0 };
 
     const dup = findDuplicate_(first, last, email);
     if (dup) return handleDuplicate_(dup, b);
@@ -487,7 +546,8 @@ function doPost(e) {
     if (already) b.ref = b.ref + '-' + (already + 1);
 
     sheet_().appendRow([new Date(), b.ref, first, last, email, waText_(b.wa), seats, amount,
-                        '', '', '', '', '', '', '', isDryRun_() ? 'TEST' : '', '']);
+                        '', '', '', '', '', '', b.spons ? sponsoredNote_(b.spons) : '',
+                        isDryRun_() ? 'TEST' : '', '']);
     const sh = sheet_();
     const row = sh.getLastRow();
 
@@ -544,7 +604,8 @@ function handleDuplicate_(dup, b) {
     sh.getRange(dup.row, C.wa).setValue(waText_(b.wa));
     sh.getRange(dup.row, C.amount).setValue(b.amount);
     sh.getRange(dup.row, C.lapse).clearContent();
-    note_(sh, dup.row, 'Submitted again ' + stamp_() + ' - same ' + b.seats + ' seat(s)');
+    note_(sh, dup.row, 'Submitted again ' + stamp_() + ' - same ' + b.seats + ' seat(s)' +
+                       (b.spons ? ', ' + sponsoredNote_(b.spons) : ''));
     mailGuestBooked_(b);
     notifyOffice_(b, 'Repeat booking');
     return textOut_('updated');
@@ -558,7 +619,8 @@ function handleDuplicate_(dup, b) {
     : 'Second booking ' + stamp_() + ' - the earlier ' + dup.seats +
       '-seat booking (' + dup.ref + ') still stands';
   sh.appendRow([new Date(), b.ref, b.first, b.last, b.email, waText_(b.wa), b.seats, b.amount,
-                '', '', '', '', '', '', why, isDryRun_() ? 'TEST' : '', '']);
+                '', '', '', '', '', '', why + (b.spons ? ' | ' + sponsoredNote_(b.spons) : ''),
+                isDryRun_() ? 'TEST' : '', '']);
   note_(sh, dup.row, 'Booked again ' + stamp_() + ' as ' + b.ref +
                      ' (' + b.seats + ' seat(s)) - this booking unchanged');
   mailGuestBooked_(b);
@@ -632,7 +694,10 @@ function mailGuestBooked_(b) {
     para_('Thank you for booking ' + b.seats + (b.seats === 1 ? ' seat' : ' seats') +
           ' for the centenary organ concert on Friday 30 October 2026, 18:00 for 18:30. ' +
           'Winand Grundling at the organ, with Annatjie Joubert, soprano. Cheese and wine to follow.') +
-    para_('<b>Amount due: R' + b.amount + '</b>. Please pay by EFT using the reference exactly as shown, ' +
+    para_('<b>Amount due: R' + b.amount + '</b>' +
+          (b.spons ? ', with ' + b.spons + ' sponsored pensioner seat' + (b.spons === 1 ? '' : 's') +
+                     ' at R' + SPONSORED_RATE + (b.spons === 1 ? '' : ' each') : '') +
+          '. Please pay by EFT using the reference exactly as shown, ' +
           'so we can match your payment to your name.') +
     bankBlock_(b.ref) +
     para_('Reply to this email with the proof of payment, or send it with the reference in the ' +
@@ -839,10 +904,11 @@ function scanPop_() {
   };
   all.forEach(function (r) {
     if (r.ref) (byRef[r.ref.toUpperCase()] = byRef[r.ref.toUpperCase()] || []).push(r);
-    if (r.email) (byEmail[r.email.toLowerCase()] = byEmail[r.email.toLowerCase()] || []).push(r);
+    // Bookings under a staff address are left to the reference match alone.
+    if (r.email && !isStaff_(r.email)) (byEmail[r.email.toLowerCase()] = byEmail[r.email.toLowerCase()] || []).push(r);
   });
 
-  let matched = 0, files = 0, unmatched = 0, ours = 0;
+  let matched = 0, files = 0, unmatched = 0, ours = 0, stale = 0;
   const fresh = [];
   const seen = {};
 
@@ -882,15 +948,22 @@ function scanPop_() {
     }
     if (!r) { unmatched++; t.addLabel(label_(LABELS.unmatched)); return; }
 
+    // Mail that arrived before the booking existed cannot be its proof. This is
+    // what let a 5 October family email be filed as the proof for a booking
+    // made on 29 October.
+    const since = bookedAt_(r);
+    const proofs = msgs.filter(function (m) { return !since || m.getDate().getTime() >= since; });
+    if (!proofs.length) { stale++; return; }
+
     t.addLabel(label_(LABELS.pop));
     if (!String(r.pop || '').trim()) {
-      sh.getRange(r.row, C.pop).setValue(msgs[msgs.length - 1].getDate());
+      sh.getRange(r.row, C.pop).setValue(proofs[proofs.length - 1].getDate());
       fresh.push(r);
       matched++;
       r.pop = 'just now';   // so a second thread for the same guest does not double up
     }
     sh.getRange(r.row, C.popMail).setValue(t.getPermalink());
-    const links = saveProof_(t, r.ref || r.last);
+    const links = saveProof_(proofs, r.ref || r.last);
     if (links) { sh.getRange(r.row, C.popFile).setValue(links); files++; }
     // Dealt with: the ticket is out, so it can leave the inbox.
     if (String(r.sent || '').trim()) t.moveToArchive();
@@ -906,14 +979,16 @@ function scanPop_() {
   // search by sender. This catches a reply whose reference never survived the
   // quoting, and anything the first cap cut off.
   rows_().forEach(function (r) {
-    if (String(r.pop || '').trim() || !r.email) return;
-    const q = 'from:"' + String(r.email).replace(/"/g, '') + '" newer_than:120d';
+    if (String(r.pop || '').trim() || !r.email || isStaff_(r.email)) return;
+    const since = bookedAt_(r);
+    const q = 'from:"' + String(r.email).replace(/"/g, '') + '" ' +
+              (since ? 'after:' + Math.floor(since / 1000) : 'newer_than:120d');
     GmailApp.search(q, 0, 20).forEach(function (t) { consider(t, r); });
   });
 
   if (fresh.length) alertProof_(fresh);
   return { scanned: threads.length, matched: matched, files: files,
-           unmatched: unmatched, skippedOwn: ours, filed: fileInbox_() };
+           unmatched: unmatched, skippedOwn: ours, olderThanBooking: stale, filed: fileInbox_() };
 }
 
 /**
@@ -952,14 +1027,14 @@ function doGet(e) {
   const p = (e && e.parameter) || {};
   // Two pages, two keys. The office link reaches only the booking form, so a
   // screen at the front desk can never show the whole ledger.
-  if (String(p.desk || '') === officeKey_()) {
+  if (keyOk_(p.desk, officeKey_())) {
     const o = HtmlService.createTemplateFromFile('Office');
     o.key = officeKey_();
     return o.evaluate()
       .setTitle('Song for a Century - office bookings')
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
-  if (String(p.key || '') !== adminKey_()) {
+  if (!keyOk_(p.key, adminKey_())) {
     return HtmlService.createHtmlOutput(
       '<div style="font-family:Georgia,serif;background:#f5f1e7;color:#1c1a15;padding:60px;text-align:center;">' +
       '<div style="font-size:26px;">Song for a Century</div>' +
@@ -973,8 +1048,8 @@ function doGet(e) {
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
-function guard_(key) { if (key !== adminKey_()) throw new Error('Not authorised.'); }
-function deskGuard_(key) { if (key !== officeKey_()) throw new Error('Not authorised.'); }
+function guard_(key) { if (!keyOk_(key, adminKey_())) throw new Error('Not authorised.'); }
+function deskGuard_(key) { if (!keyOk_(key, officeKey_())) throw new Error('Not authorised.'); }
 
 function officeUrl_() {
   return ScriptApp.getService().getUrl() + '?desk=' + officeKey_();
@@ -1148,11 +1223,18 @@ function officeRef_(first, last, seats) {
   return 'SFAC-' + part(first) + '-' + part(last) + '-' + seats;
 }
 
-/** Pensioner seats at R250, the rest at the couple/single rate. */
-function priceWith_(seats, pensioners) {
+/** Pensioner seats at R250, or R125 when sponsored; the rest at the couple/single rate. */
+function priceWith_(seats, pensioners, sponsored) {
   const p = Math.min(seats, Math.max(0, pensioners || 0));
   const rest = seats - p;
-  return p * 250 + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
+  return p * (sponsored ? SPONSORED_RATE : 250) + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
+}
+
+/** What a pensioner pays on a sponsored ticket; the centenary fund covers the rest of the R250. */
+const SPONSORED_RATE = 125;
+
+function sponsoredNote_(pens) {
+  return pens + ' sponsored pensioner seat(s) at R' + SPONSORED_RATE;
 }
 
 /**
@@ -1181,19 +1263,21 @@ function officeCreate_(d) {
   const paid  = !!d.paid;
   const seats = Math.max(1, parseInt(d.seats, 10) || 1);
   const pens  = Math.min(seats, Math.max(0, parseInt(d.pensioners, 10) || 0));
-  const amount = parseInt(d.amount, 10) || priceWith_(seats, pens);
+  const sponsored = pens > 0 && !!d.sponsored;
+  const amount = parseInt(d.amount, 10) || priceWith_(seats, pens, sponsored);
 
   let ref = officeRef_(first, last, seats);
   const already = countRef_(ref);
   if (already) ref = ref + '-' + (already + 1);
 
   const bits = [OFFICE_TAG + ' ' + stamp_(), paid ? 'paid at the desk' : 'to pay by EFT'];
-  if (pens) bits.push(pens + ' pensioner seat(s)');
+  if (pens) bits.push(sponsored ? sponsoredNote_(pens) : pens + ' pensioner seat(s)');
   if (String(d.how || '').trim()) bits.push(String(d.how).trim());
   if (String(d.note || '').trim()) bits.push(String(d.note).trim());
 
   const b = { ref: ref, first: first, last: last, email: email,
-              wa: String(d.wa || '').trim(), seats: seats, amount: amount };
+              wa: String(d.wa || '').trim(), seats: seats, amount: amount,
+              spons: sponsored ? pens : 0 };
 
   const sh = sheet_();
   sh.appendRow([new Date(), ref, first, last, email, waText_(b.wa), seats, amount,
@@ -1421,7 +1505,7 @@ function statusCheck() {
     'Lapse chaser: ' + (triggers.indexOf('chaseUnpaid') > -1 ? 'installed' : 'MISSING - run installTrigger'),
     'Last scan: ' + (health_().scanOk || 'none yet on this build - check again in 5 minutes') +
       (health_().scanErr ? ' | last scan error: ' + health_().scanErr : ''),
-    'Keys: ' + (adminKey_() === 'centenary26' || officeKey_() === 'desk26' ? 'STILL THE OLD ONES - run rotateKeys' : 'not the old ones'),
+    'Keys: ' + (!adminKey_() || !officeKey_() ? 'NOT SET - run rotateKeys, the console is locked until you do' : 'set in Script Properties'),
     'Mail quota left today: ' + MailApp.getRemainingDailyQuota(),
     'Drive: ' + count('Proofs of payment') + ' | ' + count('Tickets'),
     'Drive (test): ' + count('Proofs of payment (test)') + ' | ' + count('Tickets (test)'),
@@ -1471,4 +1555,26 @@ function rotateKeys() {
   const out = 'New console link (Anika):\n' + consoleUrl_() + '\n\nNew office link (Gabi):\n' + officeUrl_();
   Logger.log(out);
   return out;
+}
+
+/**
+ * Run once from the editor after this update: every proof already filed was
+ * shared with anyone holding the link. This makes each one private and shares
+ * the folder with the office instead.
+ */
+function lockProofs() {
+  ownerOnly_();
+  let n = 0;
+  ['Proofs of payment', 'Proofs of payment (test)'].forEach(function (name) {
+    const it = rootFolder_().getFoldersByName(name);
+    while (it.hasNext()) {
+      const folder = it.next();
+      shareWithStaff_(folder);
+      const files = folder.getFiles();
+      while (files.hasNext()) { privateLink_(files.next()); n++; }
+    }
+  });
+  const msg = n + ' proof file(s) made private. The office still opens them through the shared folder.';
+  Logger.log(msg);
+  return msg;
 }
