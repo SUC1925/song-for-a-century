@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  body { margin:0; background:#f5f1e7; color:#1c1a15; font-family:Helvetica,Arial,sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:24px 20px 80px; }
+  .eyebrow { font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#9c4a26; }
+  h1 { font-family:Georgia,serif; font-weight:400; font-size:30px; margin:4px 0 6px; }
+  .lede { font-size:14px; line-height:1.55; color:#4f4941; margin:0 0 22px; max-width:560px; }
+
+  .card { background:#fffdf8; border:1px solid #d8d0c0; padding:20px; margin:0 0 20px; }
+  .card h2 { font-family:Georgia,serif; font-weight:400; font-size:20px; margin:0 0 16px; }
+
+  label.f { display:block; margin:0 0 14px; }
+  label.f .k { display:block; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+               color:#6b6355; padding:0 0 5px; }
+  input, select { font-family:inherit; font-size:16px; padding:11px 10px; border:1px solid #cdc5b4;
+                  background:#fff; color:#1c1a15; width:100%; box-sizing:border-box; }
+  .two { display:flex; gap:14px; flex-wrap:wrap; }
+  .two > label.f { flex:1 1 150px; margin-bottom:14px; }
+
+  .rate { background:#f1ebde; padding:14px 16px; margin:4px 0 16px; }
+  .rate .k { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#6b6355; }
+  .rate .v { font-family:Georgia,serif; font-size:26px; line-height:1.2; padding-top:2px; }
+  .rate .why { font-size:13px; color:#5f584e; padding-top:4px; line-height:1.5; }
+
+  button { font-family:inherit; font-size:15px; padding:13px 20px; border:1px solid #1c1a15;
+           background:transparent; color:#1c1a15; cursor:pointer; }
+  button:hover { background:#1c1a15; color:#f5f1e7; }
+  button.go { background:#9c4a26; border-color:#9c4a26; color:#fff; }
+  button.go:hover { background:#7d3a1d; }
+  button:disabled { opacity:0.4; cursor:default; }
+  .acts { display:flex; gap:10px; flex-wrap:wrap; padding-top:4px; }
+
+  .msg { padding:12px 14px; background:#1c1a15; color:#f5f1e7; font-size:14px;
+         line-height:1.5; margin:0 0 16px; display:none; }
+
+  .done { background:#fffdf8; border:1px solid #9c4a26; border-top:4px solid #9c4a26;
+          padding:20px; margin:0 0 20px; display:none; }
+  .done .who { font-family:Georgia,serif; font-size:22px; }
+  .done .ref { font-family:'Courier New',monospace; font-size:23px; letter-spacing:0.03em;
+               background:#f1ebde; padding:12px 14px; margin:12px 0 6px; word-break:break-all; }
+  .done .say { font-size:14px; line-height:1.6; color:#4f4941; }
+  .done .bank { font-size:13px; line-height:1.7; color:#4f4941; padding-top:12px; display:none; }
+  .done .bank b { color:#1c1a15; }
+
+  table { width:100%; border-collapse:collapse; font-size:14px; background:#fffdf8; }
+  th { text-align:left; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#6b6355;
+       border-bottom:1px solid #d8d0c0; padding:10px 11px; font-weight:600; }
+  td { border-bottom:1px solid #eae3d5; padding:10px 11px; vertical-align:top; }
+  .nm { font-weight:600; }
+  .ref-s { font-family:'Courier New',monospace; font-size:12px; color:#6b6355; }
+  .tick { color:#3f6b3a; font-weight:600; }
+  .wait { color:#9c4a26; }
+  .stats { display:flex; gap:26px; padding:0 0 14px; }
+  .stat .k { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#6b6355; }
+  .stat .v { font-family:Georgia,serif; font-size:22px; line-height:1.1; }
+  .empty { padding:30px; text-align:center; color:#6b6355; font-size:14px; background:#fffdf8; }
+  .fresh { font-size:11px; color:#6b6355; padding-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Stellenbosch United Church &middot; 1925&ndash;2025</div>
+  <h1>Office bookings</h1>
+  <p class="lede">For someone who books at the church office. Fill this in and the booking is
+    recorded straight away. Write the reference down for them before they leave.</p>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="done" id="done">
+    <div class="who" id="d-who"></div>
+    <div class="ref" id="d-ref"></div>
+    <div class="say" id="d-say"></div>
+    <div class="bank" id="d-bank"></div>
+    <div class="acts" style="padding-top:16px;">
+      <button id="b-again">Take another booking</button>
+    </div>
+  </div>
+
+  <div class="card" id="form">
+    <h2>New booking</h2>
+
+    <div class="two">
+      <label class="f"><span class="k">First name</span><input id="f-first"></label>
+      <label class="f"><span class="k">Surname</span><input id="f-last"></label>
+    </div>
+    <label class="f"><span class="k">Email address &mdash; the ticket goes there</span><input id="f-email" type="email"></label>
+    <label class="f"><span class="k">Mobile number</span><input id="f-wa" type="tel"></label>
+
+    <div class="two">
+      <label class="f"><span class="k">Seats</span>
+        <select id="f-seats">
+          <option>1</option><option selected>2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8</option>
+          <option>9</option><option>10</option>
+        </select>
+      </label>
+      <label class="f"><span class="k">How many are pensioners</span>
+        <select id="f-pens"></select>
+      </label>
+    </div>
+
+    <label class="f" id="f-spons-wrap" style="display:none;flex-direction:row;align-items:center;gap:10px;">
+      <input id="f-spons" type="checkbox" style="width:20px;height:20px;margin:0;">
+      <span>Sponsored pensioner ticket &mdash; they pay R125 each, the rest is sponsored</span>
+    </label>
+
+    <div class="rate">
+      <div class="k">Normal price</div>
+      <div class="v" id="f-due">R600</div>
+      <div class="why" id="f-why"></div>
+    </div>
+
+    <div class="two">
+      <label class="f"><span class="k">Have they paid?</span>
+        <select id="f-paid">
+          <option value="1" selected>Yes, paid at the office</option>
+          <option value="0">No, they will pay by EFT</option>
+        </select>
+      </label>
+      <label class="f"><span class="k">How they paid</span>
+        <select id="f-how">
+          <option value="Cash">Cash</option>
+          <option value="Card">Card</option>
+          <option value="EFT">EFT</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="two">
+      <label class="f"><span class="k">Amount paid &mdash; only if different</span><input id="f-amount" inputmode="numeric"></label>
+      <label class="f"><span class="k">Note &mdash; anything worth saying</span><input id="f-note"></label>
+    </div>
+
+    <div class="acts">
+      <button class="go" id="b-save">Record the booking</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Office bookings</div><div class="v" id="s-n">-</div></div>
+    <div class="stat"><div class="k">Seats</div><div class="v" id="s-seats">-</div></div>
+    <div class="stat"><div class="k">Taken in</div><div class="v" id="s-money">-</div></div>
+  </div>
+  <div id="body"><div class="empty">Loading&hellip;</div></div>
+  <div class="fresh" id="fresh"></div>
+</div>
+
+<script>
+  var KEY = '<?= key ?>';
+  var busy = false;
+  var BANK = [];
+  var F = function (id) { return document.getElementById(id); };
+
+  function note(t) {
+    var m = F('msg');
+    m.innerHTML = t; m.style.display = t ? 'block' : 'none';
+  }
+  function money(n) { return 'R' + (n || 0).toLocaleString('en-ZA'); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c];
+    });
+  }
+
+  function seatCount() { return Math.max(1, parseInt(F('f-seats').value, 10) || 1); }
+
+  // The pensioner list can never offer more pensioners than there are seats.
+  function fillPens() {
+    var seats = seatCount();
+    var cur = Math.min(seats, Math.max(0, parseInt(F('f-pens').value, 10) || 0));
+    var h = '';
+    for (var i = 0; i <= seats; i++) {
+      h += '<option value="' + i + '"' + (i === cur ? ' selected' : '') + '>' +
+           (i === 0 ? 'None' : i) + '</option>';
+    }
+    F('f-pens').innerHTML = h;
+  }
+
+  function priceWith(seats, pens, spons) {
+    var p = Math.min(seats, Math.max(0, pens));
+    var rest = seats - p;
+    return p * (spons ? 125 : 250) + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
+  }
+
+  function refreshDue() {
+    var seats = seatCount();
+    var pens = Math.min(seats, Math.max(0, parseInt(F('f-pens').value, 10) || 0));
+    F('f-spons-wrap').style.display = pens ? 'flex' : 'none';
+    var spons = pens > 0 && F('f-spons').checked;
+    var due = priceWith(seats, pens, spons);
+    F('f-due').textContent = money(due);
+    var bits = [];
+    if (pens) bits.push(pens + (spons ? ' \u00d7 R125 sponsored' : ' \u00d7 R250'));
+    var rest = seats - pens;
+    if (Math.floor(rest / 2)) bits.push(Math.floor(rest / 2) + ' \u00d7 R600');
+    if (rest % 2) bits.push('1 \u00d7 R350');
+    F('f-why').textContent = bits.join('  +  ') + '. Leave Amount blank to use this.';
+    F('f-amount').placeholder = String(due);
+  }
+
+  F('f-seats').onchange = function () { fillPens(); refreshDue(); };
+  F('f-pens').onchange = refreshDue;
+  F('f-spons').onchange = refreshDue;
+  F('f-paid').onchange = function () {
+    F('f-how').disabled = F('f-paid').value !== '1';
+  };
+
+  function render(d) {
+    BANK = d.bank || [];
+    if (d.dryRun) note('Dry run is on &mdash; anything recorded here is test data.');
+    F('s-n').textContent = d.list.length;
+    F('s-seats').textContent = d.seats;
+    F('s-money').textContent = money(d.money);
+
+    if (!d.list.length) {
+      F('body').innerHTML = '<div class="empty">No office bookings yet.</div>';
+      return;
+    }
+    var h = '<table><thead><tr><th>Booking</th><th>Seats</th><th>Paid</th>' +
+            '<th>Ticket</th></tr></thead><tbody>';
+    d.list.forEach(function (b) {
+      h += '<tr>' +
+        '<td><div class="nm">' + esc(b.name) + '</div>' +
+        '<div class="ref-s">' + esc(b.ref) + '</div>' +
+        '<div class="ref-s">' + esc(b.when) + '</div></td>' +
+        '<td>' + esc(b.seats) + '<div class="ref-s">' + money(b.amount) + '</div></td>' +
+        '<td>' + (b.paid ? '<span class="tick">yes</span>'
+                         : '<span class="wait">waiting</span>') + '</td>' +
+        '<td>' + (b.ticket ? esc(b.ticket) + (b.sent ? '' : '<div class="ref-s">to print</div>')
+                           : '<span class="ref-s">not yet</span>') + '</td>' +
+        '</tr>';
+    });
+    F('body').innerHTML = h + '</tbody></table>';
+  }
+
+  function showDone(m) {
+    F('d-who').textContent = m.name + ' \u00b7 ' + m.seats + ' seat' +
+      (m.seats > 1 ? 's' : '') + ' \u00b7 ' + money(m.amount);
+    F('d-ref').textContent = m.ref;
+    var say = m.paid
+      ? 'Recorded as paid. ' + m.note + ' Give them the reference above for their records.'
+      : 'Recorded, still to be paid. ' + m.note +
+        ' They must use the reference above as the payment reference, exactly as written.';
+    F('d-say').textContent = say;
+
+    var bank = F('d-bank');
+    if (!m.paid && BANK.length) {
+      bank.innerHTML = BANK.map(function (b) {
+        return '<div>' + esc(b[0]) + ': <b>' + esc(b[1]) + '</b></div>';
+      }).join('') + '<div style="padding-top:6px;">Reference: <b>' + esc(m.ref) + '</b></div>';
+      bank.style.display = 'block';
+    } else {
+      bank.style.display = 'none';
+    }
+    F('done').style.display = 'block';
+    F('form').style.display = 'none';
+    window.scrollTo(0, 0);
+  }
+
+  function clearForm() {
+    ['f-first', 'f-last', 'f-email', 'f-wa', 'f-amount', 'f-note'].forEach(function (id) {
+      F(id).value = '';
+    });
+    F('f-seats').value = '2';
+    F('f-paid').value = '1';
+    F('f-how').value = 'Cash';
+    F('f-how').disabled = false;
+    F('f-spons').checked = false;
+    fillPens(); refreshDue();
+  }
+
+  F('b-again').onclick = function () {
+    F('done').style.display = 'none';
+    F('form').style.display = 'block';
+    clearForm();
+    note('');
+    F('f-first').focus();
+  };
+
+  function done(d) {
+    busy = false;
+    F('b-save').disabled = false;
+    render(d);
+    if (d.made) { note(''); showDone(d.made); }
+    stamp();
+  }
+  function failed(e) {
+    busy = false;
+    F('b-save').disabled = false;
+    note(esc(e && e.message ? e.message : e));
+  }
+
+  function call(fn) {
+    if (busy) return;
+    busy = true;
+    var args = [KEY].concat(Array.prototype.slice.call(arguments, 1));
+    var r = google.script.run.withSuccessHandler(done).withFailureHandler(failed);
+    r[fn].apply(r, args);
+  }
+
+  F('b-save').onclick = function () {
+    if (busy) return;
+    var d = {
+      first: F('f-first').value, last: F('f-last').value,
+      email: F('f-email').value, wa: F('f-wa').value,
+      seats: F('f-seats').value, pensioners: F('f-pens').value,
+      amount: F('f-amount').value, note: F('f-note').value,
+      sponsored: F('f-spons').checked && parseInt(F('f-pens').value, 10) > 0,
+      how: F('f-paid').value === '1' ? F('f-how').value : '',
+      paid: F('f-paid').value === '1'
+    };
+    if (!d.first.trim() || !d.last.trim()) { note('First name and surname are needed.'); return; }
+    if (!d.email.trim() && !confirm('No email address. The ticket cannot be sent, so it will be printed for collection. Carry on?')) return;
+    F('b-save').disabled = true;
+    note('Recording the booking and making the ticket&hellip;');
+    call('officeAdd', d);
+  };
+
+  function stamp() {
+    var t = new Date();
+    F('fresh').textContent = 'Updated ' +
+      ('0' + t.getHours()).slice(-2) + ':' + ('0' + t.getMinutes()).slice(-2);
+  }
+
+  fillPens();
+  refreshDue();
+  call('officeList');
+</script>
+</body>
+</html>
