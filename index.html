@@ -249,6 +249,9 @@ a:hover{color:#7d3a1d}
 </select>
 </label>
 </div>
+<sc-if value="{{ hasPens }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ toggleSponsored }}" style="cursor:pointer;margin-top:12px;border:1px solid #9c4a26;background:{{ sponsBg }};color:{{ sponsFg }};padding:11px 15px;font-size:15px;font-weight:400;line-height:1.35;" style-hover="background:#eae4d6;color:#9c4a26;">{{ sponsLabel }}</div>
+</sc-if>
 <div style="font-size:15px;font-weight:300;line-height:1.55;color:#6d665c;">Pensioners pay R250 a seat. The rest of the booking is R350 each, or R600 a couple. We check this at the door, not online.</div>
 </div>
 </div>
@@ -581,6 +584,9 @@ a:hover{color:#7d3a1d}
 </select>
 </label>
 </div>
+<sc-if value="{{ hasPens }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ toggleSponsored }}" style="cursor:pointer;margin-top:12px;border:1px solid #9c4a26;background:{{ sponsBg }};color:{{ sponsFg }};padding:11px 15px;font-size:15px;font-weight:400;line-height:1.35;" style-hover="background:#eae4d6;color:#9c4a26;">{{ sponsLabel }}</div>
+</sc-if>
 <div style="font-size:15px;font-weight:300;line-height:1.55;color:#6d665c;">Pensioenarisse betaal R250 per plek. Die res van die bespreking is R350 elk, of R600 per paar. Ons kyk daarna by die deur, nie aanlyn nie.</div>
 </div>
 </div>
@@ -789,7 +795,7 @@ a:hover{color:#7d3a1d}
 class Component extends DCLogic {
   state = {
     lang: 'en', view: 'home', status: 'idle',
-    first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0'
+    first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0', spons: false
   };
 
   toggle(key) {
@@ -875,6 +881,11 @@ class Component extends DCLogic {
     return Math.min(this.seatCount(), Math.max(0, parseInt(this.state.pens, 10) || 0));
   }
 
+  /** Sponsored pensioner seats cost R125; the centenary fund covers the rest. */
+  pensRate() {
+    return this.state.spons ? 125 : 250;
+  }
+
   pensOptions() {
     const out = [];
     for (let i = 0; i <= this.seatCount(); i++) {
@@ -889,7 +900,7 @@ class Component extends DCLogic {
     const rest = this.seatCount() - p;
     const pairs = Math.floor(rest / 2);
     const parts = [];
-    if (p) parts.push(p + ' \u00d7 R250 ' + (af ? 'pensioenaris' : 'pensioner'));
+    if (p) parts.push(p + ' \u00d7 R' + this.pensRate() + ' ' + (af ? 'pensioenaris' : 'pensioner') + (this.state.spons ? (af ? ' (geborg)' : ' (sponsored)') : ''));
     if (pairs) parts.push(pairs + ' \u00d7 R600 ' + (af ? 'paar' : 'couple'));
     if (rest % 2) parts.push('1 \u00d7 R350');
     return parts.join('  +  ');
@@ -898,7 +909,7 @@ class Component extends DCLogic {
   amount() {
     const p = this.pensCount();
     const rest = this.seatCount() - p;
-    return p * 250 + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
+    return p * this.pensRate() + Math.floor(rest / 2) * 600 + (rest % 2) * 350;
   }
 
   submit() {
@@ -915,7 +926,8 @@ class Component extends DCLogic {
       wa: (s.dial + ' ' + s.wa).trim(), seats: String(Math.max(1, parseInt(s.seats, 10) || 1)),
       reference: this.reference(), amount: String(this.amount()),
       pensioners: String(this.pensCount()),
-      pensioner: this.pensCount() > 0 ? 'yes' : ''
+      pensioner: this.pensCount() > 0 ? 'yes' : '',
+      sponsored: this.pensCount() > 0 && s.spons ? 'yes' : ''
     });
     // Apps Script answers 'ok', 'ok-no-email' or 'updated' once the booking is on
     // the sheet, so only those count as sent. A repeat after an error is safe: the
@@ -931,7 +943,7 @@ class Component extends DCLogic {
 
   resetForm() {
     clearTimeout(this._clearT);
-    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0' });
+    this.setState({ status: 'idle', first: '', last: '', email: '', wa: '', dial: '+27', seats: '2', pens: '0', spons: false });
   }
 
   /** A sent booking clears itself after an hour so the next visitor starts fresh. */
@@ -982,6 +994,13 @@ class Component extends DCLogic {
       setFirst: this.set('first'), setLast: this.set('last'),
       setEmail: this.set('email'), setWa: this.set('wa'), setSeats: this.set('seats'),
       setPens: this.set('pens'),
+      hasPens: this.pensCount() > 0,
+      toggleSponsored: this.toggle('spons'),
+      sponsBg: this.state.spons ? '#9c4a26' : 'transparent',
+      sponsFg: this.state.spons ? '#f8f4ea' : '#9c4a26',
+      sponsLabel: this.state.lang === 'af'
+        ? (this.state.spons ? '\u2713 Geborgde pensioenariskaartjie: R125 elk, die res word geborg' : 'Geborgde pensioenariskaartjie? Betaal R125, die res word geborg')
+        : (this.state.spons ? '\u2713 Sponsored pensioner ticket: R125 each, the rest is sponsored' : 'Sponsored pensioner ticket? Pay R125, the rest is sponsored'),
       refPreview: this.reference(), amountDue: 'R' + this.amount(),
       breakdown: this.breakdown(),
       doSubmit: () => this.submit(),
